@@ -1,6 +1,6 @@
 {
-    "id_noticia": "noticia_1786554933",
-    "titulo": "prueba xd",
-    "mensaje": "por 2 xd",
-    "etiqueta": "INFO"
+    "id_noticia": "noticia_1786557862",
+    "titulo": "¡Nueva actualización disponible!",
+    "mensaje": "1. Arquitectura Base y EjecuciónCore Tecnológico: Aplicación de escritorio autónomo desarrollada en Python combinada con un servidor Flask local y pywebviewpara renderizar la interfaz web de manera nativa.Persistencia local: almacenamiento de configuraciones, estados de sesión y caché local guardados en un directorio oculto dentro de %AppData%.2. Interfaz y FrontendEstilos y Diseño: Uso de Tailwind CSS para estructurar la interfaz gráfica.Navegación: Vistas optimizadas para la barra lateral ( sidebar ), renderizado de resultados de búsqueda avanzadas y gestión de listas de reproducción sincronizadas con Firebase .3. Procesamiento MultimediaGestión de Audio: Integración de la librería yt-dlpen segundo plano para la extracción, resolución y gestión de archivos y listas multimedia.4. Sistema de Modificaciones y SeguridadAislamiento de entornos: Mecanismo de seguridad avanzado que aísla la ejecución de mods de terceros en contenedores restringidos.Blindaje de UI: Restricciones estrictas en el orden de inyección de scripts desde Python para evitar que modificaciones externas interfieran con los elementos protegidos de la interfaz principal.5. Actualizaciones y NovedadesIntegración con GitHub: Sistema independiente vinculado a la API de GitHub para la detección automática de lanzamientos , avisos de parches y despliegue de modales informativos de actualización dentro de la aplicación.6. Herramientas de DepuraciónConsola de Comandos: Terminal de comandos integrado e invocable mediante atajos de teclado para interactuar directamente con la lógica del servidor en tiempo real.Reportes Nativos: Captura de excepciones críticas en el backend que desencadenan alertas nativas a través de PowerShell para agilizar el diagnóstico.",
+    "etiqueta": "Nuevo"
 }
