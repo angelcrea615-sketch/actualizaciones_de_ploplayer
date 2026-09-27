@@ -1,6 +1,6 @@
 {
-    "id_noticia": "noticia_1786565492",
-    "titulo": "Actualización de ProPlayer Premium: ¡Mejoras y Correcciones!",
-    "mensaje": "Hemos aplicado una corrección importante para asegurarnos de que todo funcione a la perfección, especialmente si deja la aplicación abierta durante un buen rato. Esto es lo que incluye esta actualización:\n1. Reparación del sistema de ayuda y reportes: Solucionamos un error molesto que hacía que, si intentabas enviar un reporte de error (después de tener la app abierta por un tiempo en un segundo plano), la herramienta de diagnóstico fallaba por dentro y no te dejaba enviarlo. Ahora el sistema \"Caja Negra\" empaqueta la información de manera segura y sin bloqueos.\n2. Reparación del sistema de ayuda y reportes: Solucionamos un error molesto que hacía que, si intentabas enviar un reporte de error (después de tener la app abierta por un tiempo en un segundo plano), la herramienta de diagnóstico fallaba por dentro y no te dejaba enviarlo. Ahora el sistema \"Caja Negra\" empaqueta la información de manera segura y sin bloqueos.",
-    "etiqueta": "bugfix"
+    "id_noticia": "noticia_1790467553",
+    "titulo": "prueba de chat",
+    "mensaje": "se puso un sistema de chat de voz",
+    "etiqueta": "nuevo"
 }
