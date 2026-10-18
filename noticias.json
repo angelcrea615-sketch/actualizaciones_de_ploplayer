@@ -1,6 +1,6 @@
 {
-    "id_noticia": "noticia_1791582110",
-    "titulo": "xd",
-    "mensaje": "xd",
-    "etiqueta": "xd"
+    "id_noticia": "noticia_1792359527",
+    "titulo": "Notas de la versión 1.3.12 de proplayer",
+    "mensaje": "Mejoras principalesMayor estabilidadEl programa se ha estructurado por componentes. Las correcciones y mejoras pueden aplicarse de forma más precisa, con menor riesgo de afectar al resto de funciones.Diagnóstico de errores más claroCuando ocurre un fallo, el sistema identifica la parte de la aplicación implicada. Eso permite resolver los problemas con mayor rapidez y aprovechar mejor los reportes de los usuarios.Base preparada para el futuroLa reproducción, las listas, la búsqueda y la configuración quedan mejor organizadas, lo que facilita incorporar novedades en próximas versiones con menos riesgos.Mejor comportamiento con extensiones (mods)Las extensiones se gestionan de forma más aislada. Un error en un mod se detecta de manera independiente, sin comprometer necesariamente el uso general de ProPlayer.Experiencia de usoNo cambia la forma de usar la aplicación. La reproducción, las listas, la búsqueda y la importación de contenido funcionan como hasta ahora. Los cambios de esta versión son internos.",
+    "etiqueta": "equipo de desarrollo de proplayer"
 }
