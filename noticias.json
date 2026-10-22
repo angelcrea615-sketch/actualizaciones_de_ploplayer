@@ -1,6 +1,6 @@
 {
-    "id_noticia": "noticia_1792362594",
-    "titulo": "Novedades con mejor lectura",
-    "mensaje": "El aviso de novedades es más grande y cómodo de leer.||Si el texto es largo, puedes usar Leer más para expandirlo.||Organiza el contenido en columnas separando los bloques con || en el mensaje.",
-    "etiqueta": "INFO"
+    "id_noticia": "noticia_1792633145",
+    "titulo": "ProPlayer - Notas de actualización 1.3.14(alpha)",
+    "mensaje": "Mejoras pensadas para que la app se sienta más fluida y personal.||Visualizador en la barraAnimaciones al ritmo de la música, detrás de los controles. Varios diseños y colores, con sensibilidad ajustable. Se enciende o apaga cuando quieras.Tu estilo en la nubeColores, fuente y visualizador se guardan en tu cuenta. Entras en otro equipo y todo vuelve como lo dejaste.Más estableMenos fallos al guardar ajustes y al reiniciar el tema. La app responde de forma más predecible.||Para quien crea modsEl código está dividido por partes y los errores indican el archivo exacto. Crear y mantener mods es más simple: tocas solo lo que necesitas, sin buscar en miles de líneas.",
+    "etiqueta": "nuevo"
 }
