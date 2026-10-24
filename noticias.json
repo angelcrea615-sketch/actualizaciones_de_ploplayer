@@ -1,8 +1,8 @@
 {
-    "id_noticia": "noticia_1792805081",
-    "titulo": "ProPlayer 1.3.15alpha (alpha)",
-    "mensaje": "",
+    "id_noticia": "noticia_1792880022",
+    "titulo": "cambio en api de caratulas",
+    "mensaje": "se cambio la dorma en que se buscan || las caratulas para una mayor precision || y reconocimiento mas rapido de las canciones para el usuario",
     "etiqueta": "ALPHA",
-    "version": "1.3.15alpha",
+    "version": "1.3.16alpha",
     "canal": "alpha"
 }
