@@ -1,6 +1,8 @@
 {
-    "id_noticia": "noticia_1792633145",
-    "titulo": "ProPlayer - Notas de actualización 1.3.14(alpha)",
-    "mensaje": "Mejoras pensadas para que la app se sienta más fluida y personal.||Visualizador en la barraAnimaciones al ritmo de la música, detrás de los controles. Varios diseños y colores, con sensibilidad ajustable. Se enciende o apaga cuando quieras.Tu estilo en la nubeColores, fuente y visualizador se guardan en tu cuenta. Entras en otro equipo y todo vuelve como lo dejaste.Más estableMenos fallos al guardar ajustes y al reiniciar el tema. La app responde de forma más predecible.||Para quien crea modsEl código está dividido por partes y los errores indican el archivo exacto. Crear y mantener mods es más simple: tocas solo lo que necesitas, sin buscar en miles de líneas.",
-    "etiqueta": "nuevo"
+    "id_noticia": "noticia_1792802812",
+    "titulo": "actualizaciones",
+    "mensaje": "se mejora la comucacion con es usuario para nuevas actualizaciones sugeridas",
+    "etiqueta": "ALPHA",
+    "version": "1.3.16alpha",
+    "canal": "alpha"
 }
