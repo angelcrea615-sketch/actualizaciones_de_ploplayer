@@ -1,8 +1,8 @@
 {
-    "id_noticia": "noticia_1792890608",
-    "titulo": "prueba 2",
-    "mensaje": "prueba 2 de api de caratulas",
+    "id_noticia": "noticia_1792943418",
+    "titulo": "prueba api 3",
+    "mensaje": "se mejoro bastente el reconocimiento de portadas buscando canales verificados",
     "etiqueta": "ALPHA",
-    "version": "1.3.17alpha",
+    "version": "1.3.18alpha",
     "canal": "alpha"
 }
