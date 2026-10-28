@@ -1,8 +1,8 @@
 {
-    "id_noticia": "noticia_1792943418",
-    "titulo": "prueba api 3",
-    "mensaje": "se mejoro bastente el reconocimiento de portadas buscando canales verificados",
+    "id_noticia": "noticia_1793149971",
+    "titulo": "nuevo",
+    "mensaje": "nuevas funciones y mantener playlist mas suguras",
     "etiqueta": "ALPHA",
-    "version": "1.3.18alpha",
+    "version": "1.3.19alpha",
     "canal": "alpha"
 }
