@@ -1,8 +1,8 @@
 {
-    "id_noticia": "noticia_1793659585",
-    "titulo": "Idioma de la interfaz",
-    "mensaje": "Elige español o inglés en Personalizar → Audio → Idioma. Se guarda en el equipo y en tu cuenta.||El panel de letras y el editor respetan el idioma. La pista de audio (Original u otra) se configura aparte.||Menús, botones y paneles principales ya están traducidos. Si ves algún texto solo en un idioma, se irá completando en próximas versiones.",
+    "id_noticia": "noticia_1794185215",
+    "titulo": "ProPlayer 1.3.23alpha (alpha)",
+    "mensaje": "",
     "etiqueta": "ALPHA",
-    "version": "1.3.22alpha",
+    "version": "1.3.23alpha",
     "canal": "alpha"
 }
