@@ -1,0 +1,24 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ProPlayer · Primavera</title><meta name="description" content="Flores que aparecen y pétalos en movimiento"><style>/* ProPlayer Seasonal Theme: Primavera */
+:root[data-seasonal-theme="spring"] { color-scheme:dark; --pp-season-bg:#07170f; --pp-season-side:#123b27; --pp-season-accent:#79e6a2; --pp-season-text:#effff3; }
+html[data-seasonal-theme="spring"] body { background:#07170f !important; color:#effff3; transition:background .7s ease,color .5s ease; }
+html[data-seasonal-theme="spring"] .main-content { background:radial-gradient(ellipse at 78% 0%,#79e6a224,transparent 38%),linear-gradient(180deg,#123b27 0%,#07170f 490px) !important; }
+html[data-seasonal-theme="spring"] .sidebar { background:linear-gradient(180deg,#123b27, #07170f) !important; border-right:1px solid #79e6a255 !important; }
+html[data-seasonal-theme="spring"] .player-bar { background:linear-gradient(95deg,#123b27,#07170f) !important; border-top:1px solid #79e6a266 !important; box-shadow:0 -8px 32px #79e6a212; }
+html[data-seasonal-theme="spring"] .album-card { background:linear-gradient(145deg,#79e6a218,rgba(255,255,255,.025)) !important; border:1px solid #79e6a235 !important; transition:transform .35s,border-color .35s,box-shadow .35s; }
+html[data-seasonal-theme="spring"] .album-card:hover { transform:translateY(-5px); border-color:#79e6a2aa !important; box-shadow:0 14px 32px #79e6a220; }
+html[data-seasonal-theme="spring"] .nav-link.active { background:linear-gradient(90deg,#79e6a235,transparent) !important; color:#effff3 !important; }
+html[data-seasonal-theme="spring"] .nav-link.active .nav-icon { color:#79e6a2 !important; }
+html[data-seasonal-theme="spring"] .btn-play-big,html[data-seasonal-theme="spring"] .card-play-btn { background:linear-gradient(135deg,#79e6a2, #123b27) !important; color:#effff3 !important; box-shadow:0 0 25px #79e6a245; }
+html[data-seasonal-theme="spring"] .section-title { color:#effff3; text-shadow:0 2px 18px #79e6a235; }
+html[data-seasonal-theme="spring"] .search-wrap input:focus { border-color:#79e6a2 !important; box-shadow:0 0 0 3px #79e6a230 !important; }
+#pp-theme-decor-layer { position:fixed; inset:0; z-index:20; overflow:hidden; pointer-events:none; contain:strict; }
+#pp-theme-decor-layer .pp-particle { position:absolute; top:-12vh; left:calc(var(--i,1) * 5.4%); color:#79e6a2; opacity:.0; font-size:clamp(16px,2vw,30px); text-shadow:0 0 16px #79e6a288; animation:pp-flower-fall var(--dur,13s) linear var(--delay,0s) infinite; will-change:transform,opacity; }
+#pp-theme-decor-layer .pp-particle:nth-child(3n) { --i:3; --dur:17s; --delay:-7s; font-size:22px; }
+#pp-theme-decor-layer .pp-particle:nth-child(3n+1) { --i:7; --dur:12s; --delay:-3s; }
+#pp-theme-decor-layer .pp-particle:nth-child(3n+2) { --i:12; --dur:20s; --delay:-12s; font-size:17px; }
+#pp-theme-decor-layer .pp-particle:nth-child(4n) { --i:16; --dur:15s; --delay:-9s; }
+@keyframes pp-flower-fall { 0% { transform:translate3d(0,-8vh,0) rotate(0deg) scale(.7); opacity:0; } 12% { opacity:.48; } 82% { opacity:.34; } 100% { transform:translate3d(8vw,115vh,0) rotate(340deg) scale(1.12); opacity:0; } }
+html[data-seasonal-theme="spring"] .main-content { animation:pp-flower-ambient 8s ease-in-out infinite alternate; }
+@keyframes pp-flower-ambient { from { filter:saturate(.96); } to { filter:saturate(1.12); } }
+@media(prefers-reduced-motion:reduce) { #pp-theme-decor-layer .pp-particle,html[data-seasonal-theme="spring"] .main-content { animation:none !important; } html[data-seasonal-theme="spring"] .album-card { transition:none !important; } }
+</style></head><body><div class="pp-seasonal-atmosphere" aria-hidden="true"><span class="pp-particle p0">✿</span><span class="pp-particle p1">❀</span><span class="pp-particle p2">❋</span><span class="pp-particle p3">✿</span><span class="pp-particle p4">❀</span><span class="pp-particle p0">❋</span><span class="pp-particle p1">✿</span><span class="pp-particle p2">❀</span><span class="pp-particle p3">❋</span><span class="pp-particle p4">✿</span><span class="pp-particle p0">❀</span><span class="pp-particle p1">❋</span><span class="pp-particle p2">✿</span><span class="pp-particle p3">❀</span><span class="pp-particle p4">❋</span><span class="pp-particle p0">✿</span><span class="pp-particle p1">❀</span><span class="pp-particle p2">❋</span></div></body></html>

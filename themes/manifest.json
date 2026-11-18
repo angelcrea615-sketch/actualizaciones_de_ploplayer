@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "name": "ProPlayer HTML Themes",
+  "defaultMode": "auto",
+  "themes": [
+    {
+      "id": "new-year",
+      "name": "Año nuevo",
+      "months": [
+        1
+      ],
+      "html": "new-year.html",
+      "theme": {
+        "bg": "#090d18",
+        "side": "#111a2b",
+        "accent": "#eab308",
+        "text": "#fffdf5",
+        "glow": "rgba(234,179,8,.28)"
+      }
+    },
+    {
+      "id": "valentines",
+      "name": "San Valentín",
+      "months": [
+        2
+      ],
+      "html": "valentines.html",
+      "theme": {
+        "bg": "#170914",
+        "side": "#260f20",
+        "accent": "#f43f75",
+        "text": "#fff1f5",
+        "glow": "rgba(244,63,117,.3)"
+      }
+    },
+    {
+      "id": "spring",
+      "name": "Primavera",
+      "months": [
+        3,
+        4
+      ],
+      "html": "spring.html",
+      "theme": {
+        "bg": "#08140f",
+        "side": "#102319",
+        "accent": "#4ade80",
+        "text": "#f0fff4",
+        "glow": "rgba(74,222,128,.25)"
+      }
+    },
+    {
+      "id": "summer",
+      "name": "Verano",
+      "months": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "html": "summer.html",
+      "theme": {
+        "bg": "#07131b",
+        "side": "#0d2531",
+        "accent": "#06b6d4",
+        "text": "#ecfeff",
+        "glow": "rgba(6,182,212,.28)"
+      }
+    },
+    {
+      "id": "autumn",
+      "name": "Otoño",
+      "months": [
+        9
+      ],
+      "html": "autumn.html",
+      "theme": {
+        "bg": "#1a1009",
+        "side": "#2b1b10",
+        "accent": "#f97316",
+        "text": "#fff7ed",
+        "glow": "rgba(249,115,22,.28)"
+      }
+    },
+    {
+      "id": "halloween",
+      "name": "Halloween",
+      "months": [
+        10
+      ],
+      "html": "halloween.html",
+      "theme": {
+        "bg": "#100b18",
+        "side": "#1d1230",
+        "accent": "#a855f7",
+        "text": "#faf5ff",
+        "glow": "rgba(168,85,247,.3)"
+      }
+    },
+    {
+      "id": "autumn-late",
+      "name": "Otoño tardío",
+      "months": [
+        11
+      ],
+      "html": "autumn-late.html",
+      "theme": {
+        "bg": "#17100b",
+        "side": "#281b12",
+        "accent": "#d97706",
+        "text": "#fffbeb",
+        "glow": "rgba(217,119,6,.28)"
+      }
+    },
+    {
+      "id": "christmas",
+      "name": "Navidad",
+      "months": [
+        12
+      ],
+      "html": "christmas.html",
+      "theme": {
+        "bg": "#07130f",
+        "side": "#0d2119",
+        "accent": "#e04444",
+        "text": "#f4fff8",
+        "glow": "rgba(224,68,68,.34)"
+      }
+    }
+  ]
+}
