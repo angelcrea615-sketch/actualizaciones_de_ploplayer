@@ -1,4 +1,4 @@
-<!-- Navidad: Árbol grande y detallado, luces alineadas y fuegos optimizados sin lag -->
+<!-- Navidad: Árbol grande con luces animadas, luces alineadas y fuegos optimizados sin lag -->
 <style id="pp-tema-style-navidad">
 html.tema-navidad {
   --accent: #d4243b;
@@ -73,6 +73,7 @@ html.tema-navidad #loading-screen .w-10 {
 .pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
 .pp-logo-icon { position: relative; overflow: visible !important; }
 
+/* Gorro navideño vectorial puro (sin emojis) */
 .pp-seasonal-hat {
   position: absolute; top: -18px; left: 50%;
   transform: translateX(-42%) rotate(-12deg);
@@ -114,6 +115,7 @@ html.tema-navidad #loading-screen .w-10 {
   100% { transform: translate3d(var(--drift,24px), 110vh, 0); opacity: .05; }
 }
 
+/* Árbol de Navidad Gigante, Mejorado y Detallado (Esquina inferior derecha) */
 .pp-xmas-tree {
   position: fixed;
   right: 28px;
@@ -223,21 +225,28 @@ html.tema-navidad #loading-screen .w-10 {
       el.className = "pp-xmas-tree";
       el.innerHTML =
         '<svg width="110" height="150" viewBox="0 0 110 150" xmlns="http://www.w3.org/2000/svg">' +
+        '<style>' +
+          '@keyframes lightBlink1 { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }' +
+          '@keyframes lightBlink2 { 0%, 100% { opacity: 1; transform: scale(1.2); } 50% { opacity: 0.3; transform: scale(0.8); } }' +
+          '.bulb-red { animation: lightBlink1 1.2s infinite ease-in-out; transform-origin: center; }' +
+          '.bulb-yellow { animation: lightBlink2 1.5s infinite ease-in-out; transform-origin: center; }' +
+          '.bulb-white { animation: lightBlink1 0.9s infinite ease-in-out; transform-origin: center; }' +
+        '</style>' +
         '<polygon points="55,8 82,42 28,42" fill="#0d8a45"/>' +
         '<polygon points="55,24 92,72 18,72" fill="#0b7a3c"/>' +
         '<polygon points="55,48 100,104 10,104" fill="#0a6b35"/>' +
         '<polygon points="55,76 106,132 4,132" fill="#08572b"/>' +
         '<rect x="46" y="132" width="18" height="18" rx="3" fill="#5a3319"/>' +
         '<polygon class="star-glow" points="55,0 57,5 62,6 58,10 59,15 55,12 51,15 52,10 48,6 53,5" fill="#f5c542"/>' +
-        '<circle cx="42" cy="52" r="3.6" fill="#d4243b"/>' +
-        '<circle cx="68" cy="58" r="3.6" fill="#f5c542"/>' +
-        '<circle cx="55" cy="80" r="3.6" fill="#ffffff"/>' +
-        '<circle cx="32" cy="90" r="3.6" fill="#d4243b"/>' +
-        '<circle cx="78" cy="94" r="3.6" fill="#f5c542"/>' +
-        '<circle cx="45" cy="112" r="3.6" fill="#f5c542"/>' +
-        '<circle cx="65" cy="116" r="3.6" fill="#d4243b"/>' +
-        '<circle cx="66" cy="36" r="2.8" fill="#ffffff"/>' +
-        '<circle cx="44" cy="32" r="2.8" fill="#f5c542"/>' +
+        '<circle class="bulb-red" cx="42" cy="52" r="4" fill="#d4243b"/>' +
+        '<circle class="bulb-yellow" cx="68" cy="58" r="4" fill="#f5c542"/>' +
+        '<circle class="bulb-white" cx="55" cy="80" r="4" fill="#ffffff"/>' +
+        '<circle class="bulb-yellow" cx="32" cy="90" r="4" fill="#f5c542"/>' +
+        '<circle class="bulb-red" cx="78" cy="94" r="4" fill="#d4243b"/>' +
+        '<circle class="bulb-white" cx="45" cy="112" r="4" fill="#ffffff"/>' +
+        '<circle class="bulb-yellow" cx="65" cy="116" r="4" fill="#f5c542"/>' +
+        '<circle class="bulb-red" cx="66" cy="36" r="3.5" fill="#d4243b"/>' +
+        '<circle class="bulb-white" cx="44" cy="32" r="3.5" fill="#ffffff"/>' +
         '</svg>';
       document.body.appendChild(el);
     }
