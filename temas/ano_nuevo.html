@@ -1,0 +1,317 @@
+<!-- Año Nuevo: luces en toda la app (no sidebar) + fuegos canvas optimizados -->
+<style id="pp-tema-style-ano_nuevo">
+html.tema-ano_nuevo {
+  --accent: #f5c542; --accent-glow: rgba(245,197,66,.45);
+  --bg-main: #06060a; --bg-side: #0c0c14;
+  --bg-secondary: rgba(245,197,66,.12); --glass-border: rgba(245,197,66,.28);
+}
+html.tema-ano_nuevo body {
+  background: radial-gradient(ellipse 80% 45% at 50% -5%, rgba(245,197,66,.14) 0%, transparent 55%), #06060a !important;
+}
+html.tema-ano_nuevo aside.sidebar {
+  background: linear-gradient(180deg, rgba(245,197,66,.1) 0%, transparent 110px), #0c0c14 !important;
+  border-right: 1px solid rgba(245,197,66,.28) !important;
+}
+html.tema-ano_nuevo .nav-link.active {
+  background: linear-gradient(90deg, rgba(245,197,66,.28), transparent) !important;
+  box-shadow: inset 3px 0 0 #f5c542;
+}
+html.tema-ano_nuevo .nav-link.active .nav-icon { color: #f5c542 !important; }
+html.tema-ano_nuevo .main-content {
+  background: linear-gradient(180deg, rgba(245,197,66,.1) 0%, #06060a 380px) !important;
+}
+html.tema-ano_nuevo .album-card {
+  background: rgba(12,12,20,.8) !important; border: 1px solid rgba(245,197,66,.2);
+}
+html.tema-ano_nuevo .album-card:hover {
+  border-color: rgba(245,197,66,.5); box-shadow: 0 10px 28px rgba(245,197,66,.2);
+}
+html.tema-ano_nuevo .card-play-btn, html.tema-ano_nuevo .btn-play-big {
+  background: linear-gradient(135deg, #f5c542, #e8e8e8) !important;
+  box-shadow: 0 6px 22px rgba(245,197,66,.4) !important; color: #111 !important;
+}
+html.tema-ano_nuevo .player-bar {
+  background: rgba(6,6,10,.94) !important; border-top: 1px solid rgba(245,197,66,.35) !important;
+}
+html.tema-ano_nuevo .btn-play-bar { background: #f5c542 !important; color: #111 !important; }
+html.tema-ano_nuevo #seek-slider {
+  background: linear-gradient(to right, #f5c542 var(--seek-progress), #0c0c14 var(--seek-progress)) !important;
+}
+html.tema-ano_nuevo #volume-slider {
+  background: linear-gradient(to right, #e8e8e8 var(--volume-progress), #0c0c14 var(--volume-progress)) !important;
+}
+html.tema-ano_nuevo #auth-screen {
+  background: radial-gradient(ellipse at 50% 30%, rgba(245,197,66,.15), transparent 55%), #06060a !important;
+}
+html.tema-ano_nuevo .auth-btn { background: linear-gradient(135deg, #f5c542, #c9a227) !important; color: #111 !important; }
+html.tema-ano_nuevo #loading-screen {
+  background: radial-gradient(circle at 50% 35%, rgba(245,197,66,.22), #06060a 65%) !important;
+}
+html.tema-ano_nuevo .custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f5c542, #e8e8e8) !important;
+}
+html.tema-ano_nuevo .pp-logo-icon,
+html.tema-ano_nuevo aside.sidebar .w-8,
+html.tema-ano_nuevo #auth-screen .w-10,
+html.tema-ano_nuevo #loading-screen .w-10 {
+  background: linear-gradient(135deg, #f5c542, #e8e8e8) !important;
+}
+html.tema-ano_nuevo .pp-logo-icon { animation: pp-glow-ny 2s ease-in-out infinite; }
+@keyframes pp-glow-ny {
+  0%,100% { box-shadow: 0 0 8px rgba(245,197,66,.4); }
+  50% { box-shadow: 0 0 18px 5px rgba(245,197,66,.6); }
+}
+
+/* Tira de luces bien hecha (cable + bombillas) — se aplica a zonas, NUNCA sidebar */
+.pp-light-strip {
+  position: absolute; left: 0; right: 0; height: 14px; pointer-events: none; z-index: 8;
+  overflow: visible;
+}
+.pp-light-strip.top { top: 0; }
+.pp-light-strip.bottom { bottom: 0; }
+.pp-light-strip svg { width: 100%; height: 14px; display: block; }
+/* Capa fija de luces superiores/inferiores que respeta el sidebar */
+.pp-lights-overlay {
+  position: fixed; top: 0; right: 0; bottom: 0; pointer-events: none; z-index: 43;
+  left: var(--pp-sidebar-w, 240px);
+}
+.pp-lights-overlay .pp-light-strip { position: absolute; left: 0; right: 0; }
+.pp-lights-overlay .pp-light-strip.top { top: 0; }
+.pp-lights-overlay .pp-light-strip.bottom { bottom: 0; height: 14px; }
+/* Canvas de fuegos: un solo elemento, sin DOM por partícula */
+.pp-fw-canvas {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 42;
+}
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+.pp-logo-spin-once .pp-logo-icon {
+  animation: pp-spin-all 1.1s cubic-bezier(.4,.05,.5,1) both; transform-style: preserve-3d;
+}
+@keyframes pp-spin-all {
+  0% { transform: rotateY(0) scale(1); }
+  45% { transform: rotateY(180deg) scale(1.12); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+</style>
+<script>
+(function () {
+  var ID = "ano_nuevo";
+  var colors = ["#f5c542", "#e8e8e8", "#ff6b6b", "#4f46e5", "#22c55e", "#f472b6"];
+
+  function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function mark() {
+    $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
+      el.classList.add("pp-logo-wrap");
+      el.setAttribute("title", "Clic para animar");
+      var icon = el.querySelector("div.w-8, div.w-10");
+      if (icon) icon.classList.add("pp-logo-icon");
+    });
+  }
+  function spin(wrap) {
+    (wrap ? [wrap] : $(".pp-logo-wrap")).forEach(function (w) {
+      w.classList.remove("pp-logo-spin-once"); void w.offsetWidth;
+      w.classList.add("pp-logo-spin-once");
+      setTimeout(function () { w.classList.remove("pp-logo-spin-once"); }, 1200);
+    });
+  }
+  window.__ppTriggerLogoAnim = function (w) { spin(w || null); };
+  function bind() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      if (w.getAttribute("data-pp-click") === "1") return;
+      w.setAttribute("data-pp-click", "1");
+      w.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); spin(w); });
+    });
+  }
+  function enableVis() {
+    function tryOn() {
+      if (window.ProPlayerVis && window.ProPlayerVis.forceMount) { window.ProPlayerVis.forceMount(); return true; }
+      return false;
+    }
+    if (!tryOn()) { var n=0; var iv=setInterval(function(){ if(tryOn()||++n>40) clearInterval(iv); }, 250); }
+  }
+  function sidebarWidth() {
+    var side = document.querySelector("aside.sidebar");
+    if (!side || side.offsetParent === null) return 0;
+    return side.getBoundingClientRect().width || 240;
+  }
+  function makeStripSVG(colors, count) {
+    count = count || 18;
+    var parts = [];
+    parts.push('<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 14">');
+    parts.push('<path d="M0 7 Q125 2 250 7 T500 7 T750 7 T1000 7" fill="none" stroke="rgba(180,180,180,0.35)" stroke-width="1.2"/>');
+    for (var i = 0; i < count; i++) {
+      var x = 20 + (i / (count - 1)) * 960;
+      var y = 7 + Math.sin((i / (count - 1)) * Math.PI) * 2.5;
+      var c = colors[i % colors.length];
+      var delay = (i * 0.11).toFixed(2);
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.2" fill="'+c+'" opacity="0.9">');
+      parts.push('<animate attributeName="opacity" values="0.35;1;0.35" dur="1.4s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('<animate attributeName="r" values="2.6;3.8;2.6" dur="1.4s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="6" fill="'+c+'" opacity="0.15">');
+      parts.push('<animate attributeName="opacity" values="0.08;0.28;0.08" dur="1.4s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+    }
+    parts.push('</svg>');
+    return parts.join('');
+  }
+  function placeLights(colors) {
+    colors = colors || ["#d4243b", "#0d8a45", "#f5c542", "#e8e8e8"];
+    document.documentElement.style.setProperty("--pp-sidebar-w", sidebarWidth() + "px");
+    var ov = document.querySelector(".pp-lights-overlay");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "pp-lights-overlay";
+      ov.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ov);
+    }
+    ov.innerHTML = "";
+    var top = document.createElement("div");
+    top.className = "pp-light-strip top";
+    top.innerHTML = makeStripSVG(colors, 20);
+    ov.appendChild(top);
+    var bot = document.createElement("div");
+    bot.className = "pp-light-strip bottom";
+    bot.innerHTML = makeStripSVG(colors.slice().reverse(), 18);
+    ov.appendChild(bot);
+    // también en player-bar y loading (por si overlay no cubre)
+    function localStrip(host) {
+      if (!host || host.querySelector(".pp-light-strip-local")) return;
+      if (host.closest && host.closest("aside.sidebar")) return;
+      if (window.getComputedStyle(host).position === "static") host.style.position = "relative";
+      var row = document.createElement("div");
+      row.className = "pp-light-strip top pp-light-strip-local";
+      row.innerHTML = makeStripSVG(colors, 16);
+      host.insertBefore(row, host.firstChild);
+    }
+    localStrip(document.querySelector(".player-bar"));
+    localStrip(document.getElementById("loading-screen"));
+    var auth = document.querySelector("#auth-screen .auth-card");
+    if (auth) localStrip(auth);
+    // actualizar ancho sidebar al redimensionar
+    if (!window.__ppLightsResize) {
+      window.__ppLightsResize = function () {
+        document.documentElement.style.setProperty("--pp-sidebar-w", sidebarWidth() + "px");
+      };
+      window.addEventListener("resize", window.__ppLightsResize);
+    }
+  }
+
+  /* Fuegos artificiales optimizados: UN canvas, sin crear/destruir DOM */
+  var fwCanvas = null;
+  var fwCtx = null;
+  var fwParticles = [];
+  var fwRaf = null;
+  var fwLastBurst = 0;
+  var FW_MAX = 90;
+  var FW_COLORS = colors || ["#f5c542", "#e8e8e8", "#ff6b6b", "#4f46e5", "#22c55e", "#f472b6"];
+
+  function ensureFWCanvas() {
+    if (fwCanvas && fwCanvas.parentNode) return;
+    fwCanvas = document.createElement("canvas");
+    fwCanvas.className = "pp-fw-canvas";
+    fwCanvas.setAttribute("aria-hidden", "true");
+    document.body.appendChild(fwCanvas);
+    fwCtx = fwCanvas.getContext("2d", { alpha: true });
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      fwCanvas.width = Math.floor(window.innerWidth * dpr);
+      fwCanvas.height = Math.floor(window.innerHeight * dpr);
+      fwCanvas.style.width = window.innerWidth + "px";
+      fwCanvas.style.height = window.innerHeight + "px";
+      fwCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+  }
+  function explode(x, y) {
+    if (fwParticles.length > FW_MAX) return;
+    ensureFWCanvas();
+    var col = FW_COLORS[Math.floor(Math.random() * FW_COLORS.length)];
+    var n = 12 + Math.floor(Math.random() * 8);
+    for (var i = 0; i < n; i++) {
+      var ang = (Math.PI * 2 * i) / n + Math.random() * 0.15;
+      var spd = 1.8 + Math.random() * 3.5;
+      fwParticles.push({
+        x: x, y: y, vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        life: 1, decay: 0.016 + Math.random() * 0.012, color: col, size: 1.8 + Math.random() * 1.8
+      });
+    }
+  }
+  function randomBurst() {
+    if (document.hidden) return;
+    var now = Date.now();
+    if (now - fwLastBurst < 900) return;
+    fwLastBurst = now;
+    explode(
+      window.innerWidth * (0.12 + Math.random() * 0.76),
+      window.innerHeight * (0.08 + Math.random() * 0.42)
+    );
+  }
+  function loopFW() {
+    fwRaf = requestAnimationFrame(loopFW);
+    if (!fwCtx || !fwCanvas) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    fwCtx.clearRect(0, 0, w, h);
+    for (var i = fwParticles.length - 1; i >= 0; i--) {
+      var p = fwParticles[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.life -= p.decay;
+      if (p.life <= 0) { fwParticles.splice(i, 1); continue; }
+      fwCtx.globalAlpha = Math.max(0, p.life * 0.9);
+      fwCtx.fillStyle = p.color;
+      fwCtx.beginPath();
+      fwCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      fwCtx.fill();
+    }
+    fwCtx.globalAlpha = 1;
+  }
+  function startFW() {
+    ensureFWCanvas();
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    loopFW();
+    for (var i = 0; i < 2; i++) setTimeout(randomBurst, 400 + i * 600);
+    if (window.__ppFWTimer) clearInterval(window.__ppFWTimer);
+    window.__ppFWTimer = setInterval(randomBurst, 1800);
+  }
+  function stopFW() {
+    if (window.__ppFWTimer) clearInterval(window.__ppFWTimer);
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    fwRaf = null;
+    fwParticles = [];
+    if (fwCanvas && fwCanvas.parentNode) fwCanvas.parentNode.removeChild(fwCanvas);
+    fwCanvas = null; fwCtx = null;
+  }
+
+  window.__ppSeasonalVisDraw = function (ctx, canvas, data, api) {
+    var w = canvas.width, h = canvas.height, n = 28, muestra = api.muestra, sens = api.sensitivity || 1.6;
+    var bass = muestra(data, 0, 6) / 255;
+    if (bass > 0.55 && Math.random() < 0.1) randomBurst();
+    for (var j = 0; j < n; j++) {
+      var prom = muestra(data, j, n);
+      var level = Math.min(1, (prom / 255) * sens);
+      var x = ((j + 0.5) / n) * w;
+      var barH = Math.max(1, level * h * 0.42);
+      ctx.fillStyle = colors[j % colors.length] + "66";
+      ctx.fillRect(x - 2, h - barH, 4, barH);
+    }
+    return true;
+  };
+  mark(); bind();
+  placeLights(colors);
+  enableVis();
+  startFW();
+  setTimeout(function () { spin(); }, 400);
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    window.__ppSeasonalVisDraw = null;
+    stopFW();
+    document.querySelectorAll(".pp-lights-overlay, .pp-light-strip, .pp-fw-canvas").forEach(function (e) { e.remove(); });
+    $(".pp-logo-wrap").forEach(function (w) {
+      w.classList.remove("pp-logo-spin-once"); w.removeAttribute("data-pp-click");
+    });
+    window.__ppTriggerLogoAnim = null;
+  };
+})();
+</script>
