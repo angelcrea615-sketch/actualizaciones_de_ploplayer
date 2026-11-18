@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "activo": "navidad",
-  "forzar_siempre": true,
   "base_url": "https://raw.githubusercontent.com/angelcrea615-sketch/actualizaciones_de_ploplayer/main/temas/",
   "temas": [
     {
@@ -15,7 +13,7 @@
       "id": "ano_nuevo",
       "nombre": "Año Nuevo",
       "archivo": "ano_nuevo.html",
-      "desde": "2025-12-28",
+      "desde": "2025-11-18",
       "hasta": "2026-01-05"
     },
     {
