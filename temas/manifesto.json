@@ -6,15 +6,15 @@
       "id": "navidad",
       "nombre": "Navidad",
       "archivo": "navidad.html",
-      "desde": "2025-11-18",
-      "hasta": "2026-01-06"
+      "desde": "2026-11-10",
+      "hasta": "2027-01-06"
     },
     {
       "id": "ano_nuevo",
       "nombre": "Año Nuevo",
       "archivo": "ano_nuevo.html",
-      "desde": "2025-12-28",
-      "hasta": "2026-01-05"
+      "desde": "2026-12-28",
+      "hasta": "2027-01-05"
     }
  ],
   "nota": "Los .html de tema SOLO se sirven desde GitHub. Sube este manifesto y los html a la carpeta temas/ del repo."
