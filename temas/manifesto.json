@@ -6,14 +6,14 @@
       "id": "navidad",
       "nombre": "Navidad",
       "archivo": "navidad.html",
-      "desde": "2026-11-23",
+      "desde": "2026-11-13",
       "hasta": "2026-12-31"
     },
     {
       "id": "ano_nuevo",
       "nombre": "Año Nuevo",
       "archivo": "ano_nuevo.html",
-      "desde": "2026-12-28",
+      "desde": "2027-01-01",
       "hasta": "2027-01-05"
     }
  ],
