@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "actualizado": "2026-11-17",
+  "comentario": "Solo IDs y fechas. El diseño real está en cada .html — la gente no ve el tema hasta que se activa.",
+  "activo": "navidad",
+  "forzar_siempre": true,
+  "base_url": "https://raw.githubusercontent.com/angelcrea615-sketch/actualizaciones_de_ploplayer/main/temas/",
+  "temas": [
+    {
+      "id": "navidad",
+      "archivo": "navidad.html",
+      "desde": "2026-12-01",
+      "hasta": "2026-12-26",
+      "prioridad": 10
+    },
+    {
+      "id": "ano_nuevo",
+      "archivo": "ano_nuevo.html",
+      "desde": "2026-12-27",
+      "hasta": "2027-01-05",
+      "prioridad": 9
+    },
+    {
+      "id": "halloween",
+      "archivo": "halloween.html",
+      "desde": "2026-10-20",
+      "hasta": "2026-11-02",
+      "prioridad": 8
+    },
+    {
+      "id": "san_valentin",
+      "archivo": "san_valentin.html",
+      "desde": "2026-02-10",
+      "hasta": "2026-02-15",
+      "prioridad": 7
+    }
+  ],
+  "manual_override_permitido": true
+}
