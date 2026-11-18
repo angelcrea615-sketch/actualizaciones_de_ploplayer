@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "base_url": "https://raw.githubusercontent.com/angelcrea615-sketch/actualizaciones_de_ploplayer/main/temas/",
+  "temas": [
+    {
+      "id": "navidad",
+      "nombre": "Navidad",
+      "archivo": "navidad.html",
+      "desde": "2025-11-18",
+      "hasta": "2026-01-06"
+    },
+    {
+      "id": "ano_nuevo",
+      "nombre": "Año Nuevo",
+      "archivo": "ano_nuevo.html",
+      "desde": "2025-11-18",
+      "hasta": "2026-01-05"
+    },
