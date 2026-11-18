@@ -1,0 +1,131 @@
+<!-- ProPlayer tema: navidad — archivo remoto / local. No es una página completa. -->
+<style id="pp-tema-style-navidad">
+html.tema-navidad { --accent: #c41e3a; --accent-seasonal: #0f7b3c; }
+html.tema-navidad body { background: #0a0f0c; }
+html.tema-navidad { --bg-main: #0a0f0c; --bg-side: #0d1510; }
+html.tema-navidad .btn-play-big,
+html.tema-navidad .btn-play-bar { box-shadow: 0 4px 22px rgba(196, 30, 58, 0.5) !important; }
+html.tema-navidad aside.sidebar { box-shadow: inset -1px 0 0 rgba(15, 123, 60, 0.4); }
+html.tema-navidad .album-card:hover { box-shadow: 0 8px 28px rgba(15, 123, 60, 0.22); }
+
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: 0.75rem; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+
+.pp-seasonal-hat {
+  position: absolute; top: -14px; left: 50%;
+  transform: translateX(-42%) rotate(-12deg);
+  pointer-events: none; z-index: 5;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
+  animation: pp-hat-pop .55s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .85s;
+}
+@keyframes pp-hat-pop {
+  from { opacity: 0; transform: translateX(-42%) translateY(-12px) rotate(-25deg) scale(.6); }
+  to   { opacity: 1; transform: translateX(-42%) rotate(-12deg) scale(1); }
+}
+.pp-logo-spin-hat .pp-logo-icon {
+  animation: pp-logo-flip 1.15s cubic-bezier(.45,.05,.55,.95) both;
+  transform-style: preserve-3d;
+}
+@keyframes pp-logo-flip {
+  0%   { transform: rotateY(0deg) scale(1); }
+  40%  { transform: rotateY(180deg) scale(1.08); }
+  70%  { transform: rotateY(300deg) scale(1.04); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+.pp-seasonal-fx-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden;
+}
+.pp-particle-nieve {
+  position: absolute; top: -20px; border-radius: 50%;
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 0 4px rgba(255,255,255,.4);
+  animation: pp-fall-snow linear forwards;
+}
+@keyframes pp-fall-snow {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: 1; }
+  100% { transform: translateY(105vh) translateX(40px); opacity: .1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pp-logo-spin-hat .pp-logo-icon, .pp-seasonal-hat, .pp-particle-nieve { animation: none !important; }
+}
+</style>
+<script>
+(function () {
+  var ID = "navidad";
+  function asegurarLogo() {
+    document.querySelectorAll("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center").forEach(function (el) {
+      el.classList.add("pp-logo-wrap");
+      var icon = el.querySelector("div.w-8, div.w-10");
+      if (icon) icon.classList.add("pp-logo-icon");
+    });
+  }
+  function gorro() {
+    document.querySelectorAll(".pp-logo-wrap").forEach(function (w) {
+      var icon = w.querySelector(".pp-logo-icon") || w.querySelector("div");
+      if (!icon || icon.querySelector(".pp-seasonal-hat")) return;
+      icon.style.position = icon.style.position || "relative";
+      var hat = document.createElement("span");
+      hat.className = "pp-seasonal-hat";
+      hat.setAttribute("aria-hidden", "true");
+      hat.innerHTML = '<svg viewBox="0 0 64 48" width="28" height="22" fill="none"><path d="M8 36c0-14 12-28 24-28s24 14 24 28" fill="#c41e3a"/><path d="M6 36h52v6H6z" fill="#f5f5f5"/><circle cx="48" cy="12" r="6" fill="#f5f5f5"/></svg>';
+      icon.appendChild(hat);
+    });
+  }
+  function spin() {
+    document.querySelectorAll(".pp-logo-wrap").forEach(function (w) {
+      w.classList.remove("pp-logo-spin-hat");
+      void w.offsetWidth;
+      w.classList.add("pp-logo-spin-hat");
+    });
+  }
+  function nieve() {
+    var layer = document.querySelector(".pp-seasonal-fx-layer");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "pp-seasonal-fx-layer";
+      layer.setAttribute("aria-hidden", "true");
+      document.body.appendChild(layer);
+    }
+    function flake() {
+      if (document.hidden) return;
+      if (layer.querySelectorAll(".pp-particle-nieve").length > 45) return;
+      var p = document.createElement("span");
+      p.className = "pp-particle-nieve";
+      var size = 3 + Math.random() * 7;
+      p.style.left = Math.random() * 100 + "%";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.animationDuration = 6 + Math.random() * 8 + "s";
+      p.style.animationDelay = Math.random() * 2 + "s";
+      layer.appendChild(p);
+      setTimeout(function () { if (p.parentNode) p.remove(); }, 16000);
+    }
+    for (var i = 0; i < 14; i++) flake();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    window.__ppSnowTimer = setInterval(flake, 700);
+  }
+  function applyColors() {
+    var r = document.documentElement;
+    r.style.setProperty("--accent", "#c41e3a");
+    r.style.setProperty("--bg-main", "#0a0f0c");
+    r.style.setProperty("--bg-side", "#0d1510");
+  }
+  asegurarLogo();
+  applyColors();
+  gorro();
+  spin();
+  nieve();
+  if (window.__ppLogoRepeat) clearInterval(window.__ppLogoRepeat);
+  window.__ppLogoRepeat = setInterval(spin, 8 * 60 * 1000);
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppLogoRepeat) clearInterval(window.__ppLogoRepeat);
+    document.querySelectorAll(".pp-seasonal-hat, .pp-seasonal-fx-layer").forEach(function (e) { e.remove(); });
+    document.querySelectorAll(".pp-logo-wrap").forEach(function (w) { w.classList.remove("pp-logo-spin-hat"); });
+  };
+})();
+</script>

@@ -1,0 +1,72 @@
+<!-- ProPlayer tema: ano_nuevo -->
+<style id="pp-tema-style-ano_nuevo">
+html.tema-ano_nuevo { --accent: #f5c542; --bg-main: #08080c; --bg-side: #0e0e14; }
+html.tema-ano_nuevo .nav-link.active .nav-icon { color: #f5c542; }
+html.tema-ano_nuevo .btn-play-big { box-shadow: 0 4px 24px rgba(245, 197, 66, 0.45) !important; }
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+.pp-logo-glow .pp-logo-icon {
+  animation: pp-logo-glow-pulse 2.2s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(245,197,66,.5);
+  border-radius: 10px;
+}
+@keyframes pp-logo-glow-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(245,197,66,.35); filter: brightness(1); }
+  50% { box-shadow: 0 0 18px 4px rgba(245,197,66,.55); filter: brightness(1.15); }
+}
+.pp-seasonal-fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
+.pp-particle-confeti {
+  position: absolute; top: -20px; border-radius: 2px;
+  animation: pp-fall-confeti linear forwards;
+}
+@keyframes pp-fall-confeti {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: .15; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pp-logo-glow .pp-logo-icon, .pp-particle-confeti { animation: none !important; }
+}
+</style>
+<script>
+(function () {
+  var ID = "ano_nuevo";
+  var colors = ["#f5c542", "#e8e8e8", "#ff6b6b", "#4f46e5", "#22c55e"];
+  document.querySelectorAll("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center").forEach(function (el) {
+    el.classList.add("pp-logo-wrap");
+    var icon = el.querySelector("div.w-8, div.w-10");
+    if (icon) { icon.classList.add("pp-logo-icon"); el.classList.add("pp-logo-glow"); }
+  });
+  var r = document.documentElement;
+  r.style.setProperty("--accent", "#f5c542");
+  r.style.setProperty("--bg-main", "#08080c");
+  r.style.setProperty("--bg-side", "#0e0e14");
+
+  var layer = document.createElement("div");
+  layer.className = "pp-seasonal-fx-layer";
+  layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+  function confeti() {
+    if (document.hidden || layer.querySelectorAll(".pp-particle-confeti").length > 35) return;
+    var p = document.createElement("span");
+    p.className = "pp-particle-confeti";
+    var s = 4 + Math.random() * 8;
+    p.style.left = Math.random() * 100 + "%";
+    p.style.width = s + "px";
+    p.style.height = s * 0.6 + "px";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = 5 + Math.random() * 7 + "s";
+    layer.appendChild(p);
+    setTimeout(function () { p.remove(); }, 14000);
+  }
+  for (var i = 0; i < 12; i++) confeti();
+  if (window.__ppConfetiTimer) clearInterval(window.__ppConfetiTimer);
+  window.__ppConfetiTimer = setInterval(confeti, 550);
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    if (window.__ppConfetiTimer) clearInterval(window.__ppConfetiTimer);
+    document.querySelectorAll(".pp-seasonal-fx-layer").forEach(function (e) { e.remove(); });
+    document.querySelectorAll(".pp-logo-wrap").forEach(function (w) { w.classList.remove("pp-logo-glow"); });
+  };
+})();
+</script>

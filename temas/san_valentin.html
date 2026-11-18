@@ -1,0 +1,68 @@
+<!-- ProPlayer tema: san_valentin -->
+<style id="pp-tema-style-san_valentin">
+html.tema-san_valentin { --accent: #e11d48; --bg-main: #0c080a; --bg-side: #140c10; }
+html.tema-san_valentin .btn-play-big { box-shadow: 0 4px 22px rgba(225, 29, 72, 0.45) !important; }
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+.pp-logo-heartbeat .pp-logo-icon { animation: pp-logo-heartbeat 1.4s ease-in-out infinite; }
+@keyframes pp-logo-heartbeat {
+  0%,100% { transform: scale(1); }
+  15% { transform: scale(1.12); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.08); }
+  60% { transform: scale(1); }
+}
+.pp-seasonal-fx-layer { position: fixed; inset: 0; pointer-events: none; z-index: 40; overflow: hidden; }
+.pp-particle-corazon {
+  position: absolute; top: -20px; line-height: 1;
+  color: #e11d48; text-shadow: 0 0 6px rgba(225,29,72,.5);
+  animation: pp-fall-heart linear forwards;
+  background: transparent !important;
+}
+@keyframes pp-fall-heart {
+  0% { transform: translateY(0) scale(.8); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: translateY(105vh) scale(1.15); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pp-logo-heartbeat .pp-logo-icon, .pp-particle-corazon { animation: none !important; }
+}
+</style>
+<script>
+(function () {
+  var ID = "san_valentin";
+  document.querySelectorAll("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center").forEach(function (el) {
+    el.classList.add("pp-logo-wrap", "pp-logo-heartbeat");
+    var icon = el.querySelector("div.w-8, div.w-10");
+    if (icon) icon.classList.add("pp-logo-icon");
+  });
+  var r = document.documentElement;
+  r.style.setProperty("--accent", "#e11d48");
+  r.style.setProperty("--bg-main", "#0c080a");
+  r.style.setProperty("--bg-side", "#140c10");
+  var layer = document.createElement("div");
+  layer.className = "pp-seasonal-fx-layer";
+  document.body.appendChild(layer);
+  function heart() {
+    if (document.hidden || layer.querySelectorAll(".pp-particle-corazon").length > 22) return;
+    var p = document.createElement("span");
+    p.className = "pp-particle-corazon";
+    p.textContent = "♥";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.fontSize = 10 + Math.random() * 14 + "px";
+    p.style.color = Math.random() > 0.4 ? "#e11d48" : "#fb7185";
+    p.style.animationDuration = 7 + Math.random() * 6 + "s";
+    layer.appendChild(p);
+    setTimeout(function () { p.remove(); }, 14000);
+  }
+  for (var i = 0; i < 8; i++) heart();
+  if (window.__ppHeartTimer) clearInterval(window.__ppHeartTimer);
+  window.__ppHeartTimer = setInterval(heart, 900);
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    if (window.__ppHeartTimer) clearInterval(window.__ppHeartTimer);
+    document.querySelectorAll(".pp-seasonal-fx-layer").forEach(function (e) { e.remove(); });
+    document.querySelectorAll(".pp-logo-wrap").forEach(function (w) { w.classList.remove("pp-logo-heartbeat"); });
+  };
+})();
+</script>
