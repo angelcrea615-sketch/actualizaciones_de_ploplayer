@@ -1,0 +1,491 @@
+<!-- Navidad: luces alineadas, árbol, fuegos que suben y estallan (canvas) -->
+<style id="pp-tema-style-navidad">
+html.tema-navidad {
+  --accent: #d4243b;
+  --accent-glow: rgba(212, 36, 59, 0.45);
+  --bg-main: #050a07;
+  --bg-side: #0a130e;
+  --bg-secondary: #163022;
+  --glass-border: rgba(13, 138, 69, 0.22);
+}
+html.tema-navidad body {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(13,138,69,0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(212,36,59,0.08) 0%, transparent 50%),
+    var(--bg-main) !important;
+}
+html.tema-navidad aside.sidebar {
+  background: linear-gradient(180deg, rgba(13,138,69,0.1) 0%, transparent 120px), var(--bg-side) !important;
+  border-right: 1px solid rgba(13, 138, 69, 0.28) !important;
+}
+html.tema-navidad .nav-link.active {
+  background: linear-gradient(90deg, rgba(212,36,59,0.22), rgba(13,138,69,0.12)) !important;
+  box-shadow: inset 3px 0 0 #d4243b;
+}
+html.tema-navidad .nav-link.active .nav-icon { color: #d4243b !important; }
+html.tema-navidad .main-content {
+  background: linear-gradient(180deg, rgba(18,40,28,0.9) 0%, var(--bg-main) 420px) !important;
+}
+html.tema-navidad .album-card {
+  background: rgba(18, 40, 28, 0.55) !important;
+  border: 1px solid rgba(13,138,69,0.15);
+}
+html.tema-navidad .album-card:hover {
+  border-color: rgba(212,36,59,0.35);
+  box-shadow: 0 12px 32px rgba(13,138,69,0.22);
+  transform: translateY(-4px);
+}
+html.tema-navidad .card-play-btn, html.tema-navidad .btn-play-big {
+  background: linear-gradient(135deg, #d4243b, #a01a2e) !important;
+  box-shadow: 0 6px 24px rgba(212,36,59,0.45) !important;
+}
+html.tema-navidad .song-row-pl:hover {
+  background: linear-gradient(90deg, rgba(212,36,59,0.1), rgba(13,138,69,0.06)) !important;
+}
+html.tema-navidad .player-bar {
+  background: rgba(6, 12, 9, 0.94) !important;
+  border-top: 1px solid rgba(13,138,69,0.25) !important;
+}
+html.tema-navidad .btn-play-bar {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+  color: #14532d !important;
+}
+html.tema-navidad #seek-slider {
+  background: linear-gradient(to right, #d4243b var(--seek-progress), #1a3024 var(--seek-progress)) !important;
+}
+html.tema-navidad #volume-slider {
+  background: linear-gradient(to right, #0d8a45 var(--volume-progress), #1a3024 var(--volume-progress)) !important;
+}
+html.tema-navidad #auth-screen {
+  background: radial-gradient(ellipse at 50% 20%, rgba(13,138,69,0.18), transparent 50%), #050a07 !important;
+}
+html.tema-navidad .auth-btn { background: linear-gradient(135deg, #d4243b, #a01a2e) !important; }
+html.tema-navidad #loading-screen {
+  background: radial-gradient(circle at 50% 35%, #153528 0%, #050a07 65%) !important;
+}
+html.tema-navidad .custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0d8a45, #d4243b) !important;
+}
+html.tema-navidad .pp-logo-icon,
+html.tema-navidad aside.sidebar .w-8,
+html.tema-navidad #auth-screen .w-10,
+html.tema-navidad #loading-screen .w-10 {
+  background: linear-gradient(135deg, #d4243b, #0d8a45) !important;
+}
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+.pp-seasonal-hat {
+  position: absolute; top: -15px; left: 50%;
+  transform: translateX(-42%) rotate(-12deg);
+  pointer-events: none; z-index: 6;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.45));
+  animation: pp-hat-pop .55s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .7s; width: 32px; height: 24px;
+}
+@keyframes pp-hat-pop {
+  from { opacity: 0; transform: translateX(-42%) translateY(-14px) rotate(-28deg) scale(.4); }
+  to   { opacity: 1; transform: translateX(-42%) rotate(-12deg) scale(1); }
+}
+.pp-logo-spin-once .pp-logo-icon {
+  animation: pp-logo-flip 1.15s cubic-bezier(.45,.05,.55,.95) both;
+  transform-style: preserve-3d;
+}
+@keyframes pp-logo-flip {
+  0% { transform: rotateY(0) scale(1); }
+  40% { transform: rotateY(180deg) scale(1.1); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+/* Luces: capa fija alineada, deja fuera el sidebar */
+.pp-lights-overlay {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  left: var(--pp-sidebar-w, 220px);
+  pointer-events: none; z-index: 43;
+}
+.pp-light-strip {
+  position: absolute; left: 8px; right: 8px; height: 16px;
+  pointer-events: none; overflow: visible;
+}
+.pp-light-strip.top { top: 4px; }
+.pp-light-strip.bottom { bottom: 4px; }
+.pp-light-strip svg { width: 100%; height: 16px; display: block; }
+.pp-fw-canvas, .pp-fx-screen {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 42;
+}
+.pp-particle-nieve {
+  position: absolute; top: -16px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.45));
+  animation: pp-fall-snow linear forwards;
+  will-change: transform;
+}
+@keyframes pp-fall-snow {
+  0% { transform: translate3d(0,0,0); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate3d(var(--drift,24px), 110vh, 0); opacity: .05; }
+}
+/* Árbol de Navidad esquina inferior derecha del contenido (no sidebar) */
+.pp-xmas-tree {
+  position: fixed;
+  right: 18px;
+  bottom: 78px;
+  z-index: 40;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+  animation: pp-tree-in .8s cubic-bezier(.34,1.4,.64,1) both;
+}
+@keyframes pp-tree-in {
+  from { opacity: 0; transform: translateY(20px) scale(.85); }
+  to { opacity: 1; transform: none; }
+}
+.pp-xmas-tree .star {
+  animation: pp-star-twinkle 1.6s ease-in-out infinite;
+}
+@keyframes pp-star-twinkle {
+  0%,100% { opacity: .7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+</style>
+<script>
+(function () {
+  var ID = "navidad";
+  var COLORS = ["#d4243b", "#0d8a45", "#f5c542", "#ffffff"];
+  var HAT =
+    '<svg viewBox="0 0 72 52" width="32" height="24" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#b91c1c"/>' +
+    '<path d="M8 36 C14 22 30 10 44 10 C56 10 64 22 66 34" fill="#d4243b"/>' +
+    '<ellipse cx="38" cy="38" rx="30" ry="7" fill="#f8fafc"/>' +
+    '<circle cx="62" cy="12" r="7" fill="#f8fafc"/></svg>';
+  var esDiaNavidad = (function () {
+    var d = new Date();
+    return d.getMonth() === 11 && d.getDate() === 25;
+  })();
+
+  function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function markLogos() {
+    $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
+      el.classList.add("pp-logo-wrap");
+      el.setAttribute("title", "Clic para animar");
+      var icon = el.querySelector("div.w-8, div.w-10");
+      if (icon) icon.classList.add("pp-logo-icon");
+    });
+  }
+  function putHats() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      var icon = w.querySelector(".pp-logo-icon") || w.querySelector("div");
+      if (!icon || icon.querySelector(".pp-seasonal-hat")) return;
+      icon.style.position = icon.style.position || "relative";
+      var h = document.createElement("span");
+      h.className = "pp-seasonal-hat";
+      h.innerHTML = HAT;
+      icon.appendChild(h);
+    });
+  }
+  function spin(wrap) {
+    (wrap ? [wrap] : $(".pp-logo-wrap")).forEach(function (w) {
+      w.classList.remove("pp-logo-spin-once");
+      void w.offsetWidth;
+      w.classList.add("pp-logo-spin-once");
+      setTimeout(function () { w.classList.remove("pp-logo-spin-once"); }, 1250);
+    });
+  }
+  window.__ppTriggerLogoAnim = function (w) { spin(w || null); };
+  function bindClicks() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      if (w.getAttribute("data-pp-click") === "1") return;
+      w.setAttribute("data-pp-click", "1");
+      w.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation(); spin(w);
+      });
+    });
+  }
+
+  function sidebarWidth() {
+    var side = document.querySelector("aside.sidebar");
+    if (!side || side.offsetParent === null) return 0;
+    return Math.ceil(side.getBoundingClientRect().width) || 220;
+  }
+  function makeStripSVG(colors, count) {
+    count = count || 20;
+    var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 16">'];
+    // cable suave y alineado
+    parts.push('<path d="M0 9 Q 125 5 250 9 T 500 9 T 750 9 T 1000 9" fill="none" stroke="rgba(200,200,200,0.4)" stroke-width="1.3"/>');
+    for (var i = 0; i < count; i++) {
+      var x = 18 + (i / (count - 1)) * 964;
+      var y = 9 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.2;
+      var c = colors[i % colors.length];
+      var delay = (i * 0.1).toFixed(2);
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="'+c+'">');
+      parts.push('<animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="6.5" fill="'+c+'" opacity="0.12">');
+      parts.push('<animate attributeName="opacity" values="0.06;0.22;0.06" dur="1.5s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+    }
+    parts.push('</svg>');
+    return parts.join('');
+  }
+  function placeLights() {
+    document.documentElement.style.setProperty("--pp-sidebar-w", sidebarWidth() + "px");
+    var ov = document.querySelector(".pp-lights-overlay");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "pp-lights-overlay";
+      ov.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ov);
+    }
+    ov.innerHTML = "";
+    var top = document.createElement("div");
+    top.className = "pp-light-strip top";
+    top.innerHTML = makeStripSVG(COLORS, 22);
+    ov.appendChild(top);
+    var bot = document.createElement("div");
+    bot.className = "pp-light-strip bottom";
+    bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 20);
+    ov.appendChild(bot);
+    if (!window.__ppLightsResize) {
+      window.__ppLightsResize = function () {
+        document.documentElement.style.setProperty("--pp-sidebar-w", sidebarWidth() + "px");
+      };
+      window.addEventListener("resize", window.__ppLightsResize);
+    }
+  }
+
+  function placeTree() {
+    if (document.querySelector(".pp-xmas-tree")) return;
+    var el = document.createElement("div");
+    el.className = "pp-xmas-tree";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML =
+      '<svg width="72" height="96" viewBox="0 0 72 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<polygon points="36,4 48,22 24,22" fill="#0d8a45"/>' +
+      '<polygon points="36,14 56,40 16,40" fill="#0b7a3c"/>' +
+      '<polygon points="36,28 62,62 10,62" fill="#0a6b35"/>' +
+      '<rect x="30" y="62" width="12" height="16" rx="2" fill="#6b3e1f"/>' +
+      '<circle class="star" cx="36" cy="6" r="4" fill="#f5c542"/>' +
+      '<circle cx="28" cy="30" r="2.2" fill="#d4243b"/>' +
+      '<circle cx="44" cy="34" r="2.2" fill="#f5c542"/>' +
+      '<circle cx="36" cy="44" r="2.2" fill="#e8e8e8"/>' +
+      '<circle cx="22" cy="50" r="2.2" fill="#d4243b"/>' +
+      '<circle cx="50" cy="52" r="2.2" fill="#f5c542"/>' +
+      '<circle cx="34" cy="56" r="2.2" fill="#d4243b"/>' +
+      '</svg>';
+    document.body.appendChild(el);
+  }
+
+  function snow() {
+    var layer = document.querySelector(".pp-fx-screen");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "pp-fx-screen";
+      document.body.appendChild(layer);
+    }
+    function flake() {
+      if (document.hidden) return;
+      if (layer.querySelectorAll(".pp-particle-nieve").length > 36) return;
+      var p = document.createElement("span");
+      p.className = "pp-particle-nieve";
+      var size = 2 + Math.random() * 5;
+      p.style.left = Math.random() * 100 + "%";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.setProperty("--drift", (Math.random() * 60 - 15) + "px");
+      p.style.animationDuration = (9 + Math.random() * 10) + "s";
+      layer.appendChild(p);
+      setTimeout(function () { p.remove(); }, 20000);
+    }
+    for (var i = 0; i < 10; i++) flake();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    window.__ppSnowTimer = setInterval(flake, 600);
+  }
+
+  /* Fuegos: primero suben (rocket), luego estallan */
+  var fwCanvas = null, fwCtx = null, rockets = [], sparks = [], fwRaf = null, fwLast = 0;
+  var FW_MAX_SPARKS = 100;
+  function ensureFW() {
+    if (fwCanvas && fwCanvas.parentNode) return;
+    fwCanvas = document.createElement("canvas");
+    fwCanvas.className = "pp-fw-canvas";
+    document.body.appendChild(fwCanvas);
+    fwCtx = fwCanvas.getContext("2d", { alpha: true });
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      fwCanvas.width = Math.floor(window.innerWidth * dpr);
+      fwCanvas.height = Math.floor(window.innerHeight * dpr);
+      fwCanvas.style.width = window.innerWidth + "px";
+      fwCanvas.style.height = window.innerHeight + "px";
+      fwCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+  }
+  function launchRocket() {
+    if (!esDiaNavidad) return;
+    ensureFW();
+    var x = window.innerWidth * (0.15 + Math.random() * 0.7);
+    rockets.push({
+      x: x,
+      y: window.innerHeight + 10,
+      vy: -(7.5 + Math.random() * 3.5),
+      targetY: window.innerHeight * (0.12 + Math.random() * 0.32),
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      trail: []
+    });
+  }
+  function explode(x, y, color) {
+    if (sparks.length > FW_MAX_SPARKS) return;
+    var n = 16 + Math.floor(Math.random() * 10);
+    for (var i = 0; i < n; i++) {
+      var ang = (Math.PI * 2 * i) / n + Math.random() * 0.2;
+      var spd = 1.6 + Math.random() * 3.4;
+      sparks.push({
+        x: x, y: y, vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        life: 1, decay: 0.014 + Math.random() * 0.012, color: color, size: 1.6 + Math.random() * 1.6
+      });
+    }
+  }
+  function loopFW() {
+    fwRaf = requestAnimationFrame(loopFW);
+    if (!fwCtx) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    fwCtx.clearRect(0, 0, w, h);
+    // rockets subiendo
+    for (var i = rockets.length - 1; i >= 0; i--) {
+      var r = rockets[i];
+      r.y += r.vy;
+      r.trail.push({ x: r.x, y: r.y });
+      if (r.trail.length > 8) r.trail.shift();
+      // trail
+      for (var t = 0; t < r.trail.length; t++) {
+        fwCtx.globalAlpha = (t + 1) / r.trail.length * 0.5;
+        fwCtx.fillStyle = r.color;
+        fwCtx.beginPath();
+        fwCtx.arc(r.trail[t].x, r.trail[t].y, 1.5, 0, Math.PI * 2);
+        fwCtx.fill();
+      }
+      fwCtx.globalAlpha = 1;
+      fwCtx.fillStyle = "#fff";
+      fwCtx.beginPath();
+      fwCtx.arc(r.x, r.y, 2.2, 0, Math.PI * 2);
+      fwCtx.fill();
+      if (r.y <= r.targetY) {
+        explode(r.x, r.y, r.color);
+        // a veces segundo color
+        if (Math.random() > 0.5) explode(r.x, r.y, COLORS[Math.floor(Math.random() * COLORS.length)]);
+        rockets.splice(i, 1);
+      }
+    }
+    // sparks
+    for (var j = sparks.length - 1; j >= 0; j--) {
+      var p = sparks[j];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.045; p.life -= p.decay;
+      if (p.life <= 0) { sparks.splice(j, 1); continue; }
+      fwCtx.globalAlpha = Math.max(0, p.life * 0.95);
+      fwCtx.fillStyle = p.color;
+      fwCtx.beginPath();
+      fwCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      fwCtx.fill();
+    }
+    fwCtx.globalAlpha = 1;
+  }
+  function randomLaunch() {
+    if (!esDiaNavidad || document.hidden) return;
+    var now = Date.now();
+    if (now - fwLast < 700) return;
+    fwLast = now;
+    launchRocket();
+    if (Math.random() > 0.55) setTimeout(launchRocket, 180);
+  }
+  function startFW() {
+    if (!esDiaNavidad) return;
+    ensureFW();
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    loopFW();
+    setTimeout(randomLaunch, 400);
+    setTimeout(randomLaunch, 900);
+    setTimeout(randomLaunch, 1400);
+    if (window.__ppXmasFWTimer) clearInterval(window.__ppXmasFWTimer);
+    window.__ppXmasFWTimer = setInterval(randomLaunch, 1400);
+  }
+  function stopFW() {
+    if (window.__ppXmasFWTimer) clearInterval(window.__ppXmasFWTimer);
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    rockets = []; sparks = [];
+    if (fwCanvas && fwCanvas.parentNode) fwCanvas.parentNode.removeChild(fwCanvas);
+    fwCanvas = null; fwCtx = null; fwRaf = null;
+  }
+  window.__ppSeasonalIntroBurst = function () {
+    if (esDiaNavidad) {
+      for (var i = 0; i < 3; i++) setTimeout(launchRocket, i * 200);
+    }
+  };
+
+  window.__ppSeasonalVisDraw = function (ctx, canvas, data, api) {
+    var w = canvas.width, h = canvas.height;
+    var n = Math.max(14, Math.floor(w / 32));
+    var muestra = api.muestra, sens = api.sensitivity || 1.6;
+    var t = (api.colorOffset || 0) * 0.04;
+    ctx.beginPath();
+    ctx.strokeStyle = "rgba(180,180,180,0.35)";
+    ctx.lineWidth = 1.4;
+    for (var i = 0; i <= n; i++) {
+      var x = (i / n) * w;
+      var y = h * 0.3 + Math.sin((i / n) * Math.PI) * (h * 0.1) + Math.sin(t + i * 0.3) * 1.5;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    for (var j = 0; j < n; j++) {
+      var prom = muestra(data, j, n);
+      var level = Math.min(1, (prom / 255) * sens);
+      var x2 = ((j + 0.5) / n) * w;
+      var y2 = h * 0.3 + Math.sin(((j + 0.5) / n) * Math.PI) * (h * 0.1);
+      var col = COLORS[j % COLORS.length];
+      var r = 2.8 + level * Math.min(8, h * 0.18);
+      ctx.fillStyle = col;
+      ctx.globalAlpha = 0.45 + level * 0.55;
+      ctx.beginPath(); ctx.arc(x2, y2, r, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    if (esDiaNavidad) {
+      var bass = muestra(data, 0, 6) / 255;
+      if (bass > 0.58 && Math.random() < 0.06) randomLaunch();
+    }
+    return true;
+  };
+
+  function enableVis() {
+    function tryOn() {
+      if (window.ProPlayerVis && window.ProPlayerVis.forceMount) { window.ProPlayerVis.forceMount(); return true; }
+      return false;
+    }
+    if (!tryOn()) {
+      var n = 0;
+      var iv = setInterval(function () { if (tryOn() || ++n > 40) clearInterval(iv); }, 250);
+    }
+  }
+
+  markLogos(); putHats(); bindClicks();
+  placeLights(); placeTree(); snow(); enableVis(); startFW();
+  setTimeout(function () { spin(); }, 450);
+
+  if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e) {}
+  window.__ppLogoObserver = new MutationObserver(function () {
+    markLogos(); putHats(); bindClicks();
+  });
+  window.__ppLogoObserver.observe(document.body, { childList: true, subtree: true });
+
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    window.__ppSeasonalVisDraw = null;
+    window.__ppSeasonalIntroBurst = null;
+    stopFW();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e2) {}
+    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-fw-canvas, .pp-xmas-tree").forEach(function (e) { e.remove(); });
+    $(".pp-logo-wrap").forEach(function (w) {
+      w.classList.remove("pp-logo-spin-once");
+      w.removeAttribute("data-pp-click");
+    });
+    window.__ppTriggerLogoAnim = null;
+  };
+})();
+</script>
