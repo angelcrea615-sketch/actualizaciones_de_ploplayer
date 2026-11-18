@@ -1,4 +1,4 @@
-<!-- Navidad: Árbol orgánico grande, regalos al pie, luces interactivas al hacer clic, más nieve y cero emojis -->
+<!-- Navidad: Árbol interactivo (5 modos), regalos premium, más nieve, cero emojis y contadores superiores estilizados y grandes -->
 <style id="pp-tema-style-navidad">
 html.tema-navidad {
   --accent: #d4243b;
@@ -114,11 +114,11 @@ html.tema-navidad #loading-screen .w-10 {
   100% { transform: translate3d(var(--drift,28px), 110vh, 0); opacity: .12; }
 }
 
-/* Contenedor del Árbol Interactivo con Regalos */
+/* Árbol en esquina inferior derecha */
 .pp-xmas-tree {
   position: fixed;
   right: 24px;
-  bottom: 70px;
+  bottom: 25px;
   z-index: 40;
   cursor: pointer;
   pointer-events: auto !important;
@@ -126,8 +126,7 @@ html.tema-navidad #loading-screen .w-10 {
   transition: transform 0.2s ease;
   animation: pp-tree-in 0.9s cubic-bezier(.34,1.4,.64,1) both;
 }
-.pp-xmas-tree:hover { transform: scale(1.03); }
-.pp-xmas-tree:active { transform: scale(0.97); }
+.pp-xmas-tree:hover { transform: scale(1.02); }
 
 @keyframes pp-tree-in {
   from { opacity: 0; transform: translateY(30px) scale(.8); }
@@ -142,10 +141,63 @@ html.tema-navidad #loading-screen .w-10 {
   50% { opacity: 1; transform: scale(1.35); filter: drop-shadow(0 0 14px #f5c542); }
 }
 
-/* Modos de iluminación dinámicos para las luces del árbol */
+/* --- CONTADORES SUPERIORES ESTILIZADOS Y GRANDES --- */
+.pp-top-counters-bar {
+  position: fixed;
+  top: 16px;
+  right: 24px;
+  z-index: 45;
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+.pp-top-counter-box {
+  background: rgba(8, 20, 13, 0.92);
+  border: 1px solid rgba(13, 138, 69, 0.35);
+  border-radius: 12px;
+  padding: 8px 14px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  min-width: 175px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.pp-top-counter-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(212, 36, 59, 0.5);
+}
+.pp-top-counter-box.newyear {
+  border-color: rgba(245, 197, 66, 0.35);
+  background: rgba(14, 14, 22, 0.92);
+}
+.pp-top-counter-box.newyear:hover {
+  border-color: rgba(245, 197, 66, 0.7);
+}
+.pp-top-counter-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: #34d399;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.pp-top-counter-box.newyear .pp-top-counter-title {
+  color: #f5c542;
+}
+.pp-top-counter-time {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f8fafc;
+  font-family: monospace;
+  letter-spacing: .02em;
+}
+
+/* Modos de iluminación del árbol */
 .pp-xmas-tree.modo-1 .bulb-dynamic { animation: colorCycle 4s infinite linear; }
-.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.5s infinite alternate; }
-.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; filter: drop-shadow(0 0 6px #ffffff); }
+.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.4s infinite alternate; }
+.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; filter: drop-shadow(0 0 8px #ffffff); fill: #ffffff; }
+.pp-xmas-tree.modo-4 .bulb-dynamic { animation: partyDisco 0.8s infinite steps(1); }
+.pp-xmas-tree.modo-5 .bulb-dynamic { animation: waveGlow 2s infinite ease-in-out; }
 
 @keyframes colorCycle {
   0% { fill: #d4243b; filter: drop-shadow(0 0 5px #d4243b); }
@@ -155,7 +207,18 @@ html.tema-navidad #loading-screen .w-10 {
 }
 @keyframes lightBlinkFast {
   0% { opacity: 0.2; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 8px #f5c542); }
+  100% { opacity: 1; transform: scale(1.35); filter: drop-shadow(0 0 10px #f5c542); }
+}
+@keyframes partyDisco {
+  0% { fill: #ef4444; filter: drop-shadow(0 0 6px #ef4444); }
+  25% { fill: #3b82f6; filter: drop-shadow(0 0 6px #3b82f6); }
+  50% { fill: #eab308; filter: drop-shadow(0 0 6px #eab308); }
+  75% { fill: #ec4899; filter: drop-shadow(0 0 6px #ec4899); }
+  100% { fill: #22c55e; filter: drop-shadow(0 0 6px #22c55e); }
+}
+@keyframes waveGlow {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.25); filter: drop-shadow(0 0 10px #38bdf8); }
 }
 </style>
 <script>
@@ -239,44 +302,70 @@ html.tema-navidad #loading-screen .w-10 {
       ov.appendChild(bot);
     }
 
+    function placeTopCounters() {
+      if (document.querySelector(".pp-top-counters-bar")) return;
+      var bar = document.createElement("div");
+      bar.className = "pp-top-counters-bar";
+      bar.innerHTML =
+        '<div class="pp-top-counter-box">' +
+          '<div class="pp-top-counter-title">Navidad</div>' +
+          '<div id="pp-timer-xmas" class="pp-top-counter-time">--d --h --m --s</div>' +
+        '</div>' +
+        '<div class="pp-top-counter-box newyear">' +
+          '<div class="pp-top-counter-title">Año Nuevo</div>' +
+          '<div id="pp-timer-newyear" class="pp-top-counter-time">--d --h --m --s</div>' +
+        '</div>';
+      document.body.appendChild(bar);
+      iniciarContadoresNavidad();
+    }
+
     function placeTree() {
       if (document.querySelector(".pp-xmas-tree")) return;
       var el = document.createElement("div");
       el.className = "pp-xmas-tree modo-1";
-      el.setAttribute("title", "¡Haz clic para cambiar el modo de luces del árbol!");
+      el.setAttribute("title", "¡Haz clic en el árbol para cambiar sus luces!");
       
       el.innerHTML =
         '<svg width="145" height="195" viewBox="0 0 145 195" xmlns="http://www.w3.org/2000/svg">' +
-        /* Árbol frondoso y orgánico */
-        '<path d="M72 8 Q88 38 103 52 Q115 60 105 70 Q122 90 112 102 Q128 125 115 140 Q135 165 122 175 L22 175 Q9 165 28 140 Q16 125 32 102 Q22 90 39 70 Q29 60 41 52 Q56 38 72 8 Z" fill="url(#treeGradBig)" stroke="#064e21" stroke-width="1.8"/>' +
         '<defs>' +
           '<linearGradient id="treeGradBig" x1="0%" y1="0%" x2="100%" y2="100%">' +
             '<stop offset="0%" stop-color="#34d399"/>' +
             '<stop offset="45%" stop-color="#059669"/>' +
             '<stop offset="100%" stop-color="#064e21"/>' +
           '</linearGradient>' +
-          '<linearGradient id="gift1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#b91c1c"/></linearGradient>' +
-          '<linearGradient id="gift2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>' +
-          '<linearGradient id="gift3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eab308"/><stop offset="100%" stop-color="#a16207"/></linearGradient>' +
+          '<linearGradient id="giftRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f87171"/><stop offset="100%" stop-color="#b91c1c"/></linearGradient>' +
+          '<linearGradient id="giftBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>' +
+          '<linearGradient id="giftGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fde047"/><stop offset="100%" stop-color="#ca8a04"/></linearGradient>' +
+          '<linearGradient id="giftPurple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#7e22ce"/></linearGradient>' +
         '</defs>' +
-        /* Tronco */
+
+        /* Árbol frondoso y orgánico */
+        '<path d="M72 8 Q88 38 103 52 Q115 60 105 70 Q122 90 112 102 Q128 125 115 140 Q135 165 122 175 L22 175 Q9 165 28 140 Q16 125 32 102 Q22 90 39 70 Q29 60 41 52 Q56 38 72 8 Z" fill="url(#treeGradBig)" stroke="#064e21" stroke-width="1.8"/>' +
         '<rect x="61" y="175" width="22" height="16" rx="3" fill="#451a03"/>' +
         
-        /* Regalos detallados al pie del árbol */
-        /* Regalo central azul */
-        '<rect x="55" y="176" width="28" height="17" rx="2" fill="url(#gift2)"/>' +
-        '<rect x="66" y="176" width="6" height="17" fill="#f8fafc"/>' +
-        '<rect x="55" y="183" width="28" height="4" fill="#f8fafc"/>' +
-        /* Regalo rojo izquierdo */
-        '<rect x="34" y="180" width="22" height="13" rx="2" fill="url(#gift1)"/>' +
-        '<rect x="43" y="180" width="4" height="13" fill="#fbbf24"/>' +
-        /* Regalo dorado derecho */
-        '<rect x="85" y="178" width="24" height="15" rx="2" fill="url(#gift3)"/>' +
-        '<rect x="95" y="178" width="5" height="15" fill="#ef4444"/>' +
+        /* Regalos premium al pie */
+        '<ellipse cx="72" cy="191" rx="42" ry="3" fill="rgba(0,0,0,0.55)"/>' +
+        '<rect x="24" y="182" width="20" height="11" rx="2" fill="url(#giftPurple)"/>' +
+        '<rect x="32" y="182" width="4" height="11" fill="#f8fafc"/>' +
+        '<rect x="54" y="174" width="30" height="19" rx="2.5" fill="url(#giftBlue)"/>' +
+        '<rect x="67" y="174" width="5" height="19" fill="#e2e8f0"/>' +
+        '<rect x="54" y="183" width="30" height="4" fill="#e2e8f0"/>' +
+        '<path d="M63 174 C59 168 67 168 69 174 Z" fill="#cbd5e1"/>' +
+        '<path d="M72 174 C76 168 70 168 69 174 Z" fill="#cbd5e1"/>' +
+        '<circle cx="69" cy="174" r="2" fill="#ffffff"/>' +
+        '<rect x="86" y="177" width="25" height="16" rx="2" fill="url(#giftGold)"/>' +
+        '<rect x="97" y="177" width="4.5" height="16" fill="#ef4444"/>' +
+        '<rect x="86" y="184" width="25" height="3.5" fill="#ef4444"/>' +
+        '<rect x="42" y="179" width="24" height="14" rx="2" fill="url(#giftRed)"/>' +
+        '<rect x="52" y="179" width="4" height="14" fill="#fde047"/>' +
+        '<rect x="42" y="185" width="24" height="3" fill="#fde047"/>' +
+        '<rect x="45" y="170" width="16" height="10" rx="1.5" fill="url(#giftGold)"/>' +
+        '<rect x="51" y="170" width="3" height="10" fill="#dc2626"/>' +
 
         /* Estrella superior */
         '<polygon class="star-glow" points="72,0 74,5 80,6 75,11 77,17 72,13 67,17 69,11 64,6 70,5" fill="#f5c542"/>' +
-        /* Luces del árbol dinámicas */
+        
+        /* Luces */
         '<circle class="bulb-dynamic" cx="72" cy="32" r="5" fill="#d4243b"/>' +
         '<circle class="bulb-dynamic" cx="56" cy="58" r="5" fill="#f5c542"/>' +
         '<circle class="bulb-dynamic" cx="88" cy="65" r="5" fill="#38bdf8"/>' +
@@ -289,21 +378,50 @@ html.tema-navidad #loading-screen .w-10 {
         '<circle class="bulb-dynamic" cx="110" cy="142" r="5" fill="#f5c542"/>' +
         '</svg>';
 
-      // Evento interactivo al hacer clic en el árbol
+      // Evento interactivo para cambiar los 5 modos de luces
+      var modoActual = 1;
       el.addEventListener("click", function () {
-        if (el.classList.contains("modo-1")) {
-          el.classList.remove("modo-1");
-          el.classList.add("modo-2");
-        } else if (el.classList.contains("modo-2")) {
-          el.classList.remove("modo-2");
-          el.classList.add("modo-3");
-        } else {
-          el.classList.remove("modo-3");
-          el.classList.add("modo-1");
-        }
+        el.classList.remove("modo-" + modoActual);
+        modoActual = modoActual >= 5 ? 1 : modoActual + 1;
+        el.classList.add("modo-" + modoActual);
       });
 
       document.body.appendChild(el);
+    }
+
+    function iniciarContadoresNavidad() {
+      function actualizar() {
+        var ahora = new Date();
+        var anioActual = ahora.getFullYear();
+
+        var navidad = new Date(anioActual, 11, 25, 0, 0, 0);
+        if (ahora > navidad) {
+          navidad = new Date(anioActual + 1, 11, 25, 0, 0, 0);
+        }
+        var diffNavidad = navidad - ahora;
+
+        var anoNuevo = new Date(anioActual + 1, 0, 1, 0, 0, 0);
+        var diffAnioNuevo = anoNuevo - ahora;
+
+        function formatearTiempo(ms) {
+          if (ms <= 0) return "¡Llegó!";
+          var d = Math.floor(ms / (1000 * 60 * 60 * 24));
+          var h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+          var s = Math.floor((ms % (1000 * 60)) / 1000);
+          return d + "d " + h + "h " + m + "m " + s + "s";
+        }
+
+        var elXmas = document.getElementById("pp-timer-xmas");
+        var elNewYear = document.getElementById("pp-timer-newyear");
+
+        if (elXmas) elXmas.textContent = formatearTiempo(diffNavidad);
+        if (elNewYear) elNewYear.textContent = formatearTiempo(diffAnioNuevo);
+      }
+
+      actualizar();
+      if (window.__ppTimerInterval) clearInterval(window.__ppTimerInterval);
+      window.__ppTimerInterval = setInterval(actualizar, 1000);
     }
 
     function snow() {
@@ -335,6 +453,7 @@ html.tema-navidad #loading-screen .w-10 {
     markLogos();
     putHats();
     placeLights();
+    placeTopCounters();
     placeTree();
     snow();
 
@@ -354,11 +473,12 @@ html.tema-navidad #loading-screen .w-10 {
   window.__ppTemaCleanup = window.__ppTemaCleanup || {};
   window.__ppTemaCleanup[ID] = function () {
     if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppTimerInterval) clearInterval(window.__ppTimerInterval);
     if (window.__ppNavidadObserver) {
       try { window.__ppNavidadObserver.disconnect(); } catch (e) {}
       window.__ppNavidadObserver = null;
     }
-    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree").forEach(function (e) { e.remove(); });
+    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree, .pp-top-counters-bar").forEach(function (e) { e.remove(); });
   };
 })();
 </script>
