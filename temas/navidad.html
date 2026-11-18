@@ -1,4 +1,4 @@
-<!-- Navidad: Árbol orgánico y realista con luces que cambian de color, luces alineadas y cero emojis -->
+<!-- Navidad: Árbol orgánico con luces dinámicas multicolor, luces alineadas y cero emojis -->
 <style id="pp-tema-style-navidad">
 html.tema-navidad {
   --accent: #d4243b;
@@ -114,7 +114,6 @@ html.tema-navidad #loading-screen .w-10 {
   100% { transform: translate3d(var(--drift,24px), 110vh, 0); opacity: .05; }
 }
 
-/* Contenedor del Árbol Organico */
 .pp-xmas-tree {
   position: fixed;
   right: 28px;
@@ -225,7 +224,6 @@ html.tema-navidad #loading-screen .w-10 {
       el.innerHTML =
         '<svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">' +
         '<style>' +
-          /* Animación suave de cambio de color continuo en las luces del árbol */
           '@keyframes colorCycle {' +
             '0% { fill: #d4243b; filter: drop-shadow(0 0 4px #d4243b); }' +
             '33% { fill: #f5c542; filter: drop-shadow(0 0 4px #f5c542); }' +
@@ -241,7 +239,6 @@ html.tema-navidad #loading-screen .w-10 {
           '.bulb-dynamic-1 { animation: colorCycle 4s infinite linear; }' +
           '.bulb-dynamic-2 { animation: colorCycleAlt 5s infinite linear; }' +
         '</style>' +
-        /* Silueta orgánica y natural del pino (curvas suaves fluidas con path) */
         '<path d="M60 10 Q72 35 85 48 Q95 55 88 62 Q102 78 95 90 Q108 110 98 124 Q115 142 105 148 L15 148 Q5 142 22 124 Q12 110 25 90 Q18 78 32 62 Q25 55 35 48 Q48 35 60 10 Z" fill="url(#treeGrad)" stroke="#064e21" stroke-width="1.5"/>' +
         '<defs>' +
           '<linearGradient id="treeGrad" x1="0%" y1="0%" x2="100%" y2="100%">' +
@@ -250,11 +247,8 @@ html.tema-navidad #loading-screen .w-10 {
             '<stop offset="100%" stop-color="#064e21"/>' +
           '</linearGradient>' +
         '</defs>' +
-        /* Tronco texturizado realista */
         '<rect x="51" y="148" width="18" height="14" rx="3" fill="#451a03"/>' +
-        /* Estrella superior radiante */
         '<polygon class="star-glow" points="60,0 62,5 68,6 63,11 65,17 60,13 55,17 57,11 52,6 58,5" fill="#f5c542"/>' +
-        /* Luces distribuidas orgánicamente que cambian de color dinámicamente */
         '<circle class="bulb-dynamic-1" cx="60" cy="35" r="4.5"/>' +
         '<circle class="bulb-dynamic-2" cx="48" cy="55" r="4.5"/>' +
         '<circle class="bulb-dynamic-1" cx="72" cy="62" r="4.5"/>' +
