@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "temas": [
+    {
+      "id": "halloween",
+      "nombre": "Especial Halloween",
+      "archivo": "halloween.html",
+      "inicio": "10-25",
+      "fin": "11-02",
+      "habilitado": true,
+      "forzar": false
+    },
+    {
+      "id": "navidad",
+      "nombre": "Edición Navidad",
+      "archivo": "navidad.html",
+      "inicio": "12-01",
+      "fin": "12-31",
+      "habilitado": true,
+      "forzar": true
+    }
+  ]
+}

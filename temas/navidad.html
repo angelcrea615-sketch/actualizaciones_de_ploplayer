@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  /* ══ TEMA NAVIDAD PARA PROPLAYER ══ */
+  :root {
+    --bg-main: #060a12 !important;
+    --bg-side: #0a111e !important;
+    --accent: #e11d48 !important;
+    --accent-glow: rgba(225, 29, 72, 0.35) !important;
+    --glass-border: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* Guirnalda superior sutil de luces navideñas */
+  .xmas-lights {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    height: 4px;
+    z-index: 9997;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      90deg,
+      #ef4444 0px, #ef4444 12px,
+      transparent 12px, transparent 28px,
+      #22c55e 28px, #22c55e 40px,
+      transparent 40px, transparent 56px,
+      #eab308 56px, #eab308 68px,
+      transparent 68px, transparent 84px
+    );
+    opacity: 0.75;
+    animation: xmasTwinkle 2.4s ease-in-out infinite alternate;
+  }
+
+  body.mini-player .xmas-lights {
+    left: 0;
+  }
+
+  @keyframes xmasTwinkle {
+    0%   { opacity: 0.35; filter: blur(0.5px); }
+    100% { opacity: 0.95; filter: blur(0px) drop-shadow(0 2px 6px rgba(239,68,68,0.6)); }
+  }
+
+  /* Badge navideño junto al logo */
+  .sidebar .text-lg.font-bold::after {
+    content: " ❄️";
+    font-size: 0.9rem;
+  }
+
+  /* Canvas de nieve */
+  #xmas-snow-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9996;
+  }
+</style>
+</head>
+<body>
+  <div class="xmas-lights"></div>
+  <canvas id="xmas-snow-canvas"></canvas>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById('xmas-snow-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const copos = Array.from({ length: 48 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2.6 + 1,
+        vy: Math.random() * 0.9 + 0.35,
+        vx: (Math.random() - 0.5) * 0.5,
+        alpha: Math.random() * 0.55 + 0.2
+      }));
+
+      function animarNieve() {
+        if (!document.getElementById('xmas-snow-canvas')) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (const c of copos) {
+          c.y += c.vy;
+          c.x += c.vx + Math.sin(c.y * 0.012) * 0.25;
+          if (c.y > canvas.height) {
+            c.y = -5;
+            c.x = Math.random() * canvas.width;
+          }
+          ctx.beginPath();
+          ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${c.alpha})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(animarNieve);
+      }
+      requestAnimationFrame(animarNieve);
+    })();
+  </script>
+</body>
+</html>
