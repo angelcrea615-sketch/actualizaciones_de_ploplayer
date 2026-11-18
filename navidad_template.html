@@ -1,0 +1,447 @@
+<!-- Navidad Premium: Diseños de alta gama, iluminación dinámica pro, árbol gigante hiperdetallado, intro 10s -->
+<style id="pp-tema-style-navidad">
+html.tema-navidad {
+  --accent: #ff334b;
+  --accent-glow: rgba(255, 51, 75, 0.6);
+  --bg-main: #030705;
+  --bg-side: #07120c;
+  --bg-secondary: rgba(16, 185, 129, 0.12);
+  --glass-border: rgba(16, 185, 129, 0.3);
+}
+html.tema-navidad body {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -15%, rgba(16,185,129,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,51,75,0.14) 0%, transparent 55%),
+    var(--bg-main) !important;
+}
+html.tema-navidad aside.sidebar {
+  background: linear-gradient(180deg, rgba(16,185,129,0.15) 0%, rgba(7,18,12,0.98) 140px), var(--bg-side) !important;
+  border-right: 1px solid rgba(16, 185, 129, 0.35) !important;
+  box-shadow: 4px 0 30px rgba(0,0,0,0.6);
+}
+html.tema-navidad .nav-link.active {
+  background: linear-gradient(90deg, rgba(255,51,75,0.3), rgba(16,185,129,0.18)) !important;
+  box-shadow: inset 4px 0 0 #ff334b, 0 4px 15px rgba(255,51,75,0.2);
+}
+html.tema-navidad .nav-link.active .nav-icon { color: #ff334b !important; text-shadow: 0 0 10px rgba(255,51,75,0.6); }
+html.tema-navidad .main-content {
+  background: linear-gradient(180deg, rgba(10,40,24,0.85) 0%, var(--bg-main) 450px) !important;
+}
+html.tema-navidad .album-card {
+  background: rgba(10, 30, 18, 0.7) !important;
+  border: 1px solid rgba(16,185,129,0.25);
+  backdrop-filter: blur(12px);
+}
+html.tema-navidad .album-card:hover {
+  border-color: rgba(255,51,75,0.6);
+  box-shadow: 0 16px 40px rgba(16,185,129,0.3);
+  transform: translateY(-6px);
+}
+html.tema-navidad .card-play-btn, html.tema-navidad .btn-play-big {
+  background: linear-gradient(135deg, #ff334b, #c9182f) !important;
+  box-shadow: 0 8px 30px rgba(255,51,75,0.55) !important;
+}
+html.tema-navidad .song-row-pl:hover {
+  background: linear-gradient(90deg, rgba(255,51,75,0.12), rgba(16,185,129,0.08)) !important;
+}
+html.tema-navidad .player-bar {
+  background: rgba(3, 7, 5, 0.96) !important;
+  border-top: 1px solid rgba(16,185,129,0.35) !important;
+  backdrop-filter: blur(16px);
+}
+html.tema-navidad .btn-play-bar {
+  background: linear-gradient(135deg, #ecfdf5, #a7f3d0) !important;
+  color: #064e3b !important;
+  box-shadow: 0 0 20px rgba(16,185,129,0.4);
+}
+html.tema-navidad #seek-slider {
+  background: linear-gradient(to right, #ff334b var(--seek-progress), #11291d var(--seek-progress)) !important;
+}
+html.tema-navidad #volume-slider {
+  background: linear-gradient(to right, #10b981 var(--volume-progress), #11291d var(--volume-progress)) !important;
+}
+html.tema-navidad #auth-screen {
+  background: radial-gradient(ellipse at 50% 25%, rgba(16,185,129,0.25), transparent 55%), #030705 !important;
+}
+html.tema-navidad .auth-btn { background: linear-gradient(135deg, #ff334b, #c9182f) !important; }
+html.tema-navidad #loading-screen {
+  background: radial-gradient(circle at 50% 35%, #0f3822 0%, #030705 70%) !important;
+}
+html.tema-navidad .custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #ff334b) !important;
+}
+html.tema-navidad .pp-logo-icon,
+html.tema-navidad aside.sidebar .w-8,
+html.tema-navidad #auth-screen .w-10,
+html.tema-navidad #loading-screen .w-10 {
+  background: linear-gradient(135deg, #ff334b, #10b981) !important;
+  box-shadow: 0 0 25px rgba(16,185,129,0.4);
+}
+
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
+.pp-logo-icon { position: relative; overflow: visible !important; transform-style: preserve-3d; }
+
+/* Intro de 10 segundos detallada con aceleración progresiva y estabilidad final */
+.pp-logo-progressive-intro .pp-logo-icon {
+  animation: pp-progressive-spin 10s cubic-bezier(.22, .05, .25, 1) forwards;
+}
+
+@keyframes pp-progressive-spin {
+  0%   { transform: rotateY(0deg) scale(1); filter: drop-shadow(0 0 0 rgba(255,51,75,0)); }
+  15%  { transform: rotateY(360deg) scale(1.08); filter: drop-shadow(0 0 10px rgba(16,185,129,0.5)); }
+  40%  { transform: rotateY(1440deg) scale(1.15); filter: drop-shadow(0 0 18px rgba(255,51,75,0.7)); }
+  75%  { transform: rotateY(3240deg) scale(1.2); filter: drop-shadow(0 0 22px rgba(16,185,129,0.8)); }
+  92%  { transform: rotateY(4320deg) scale(1.15); filter: drop-shadow(0 0 15px rgba(255,51,75,0.6)); }
+  100% { transform: rotateY(5040deg) scale(1); filter: drop-shadow(0 0 5px rgba(16,185,129,0.3)); }
+}
+
+.pp-seasonal-hat {
+  position: absolute; top: -26px; left: 50%;
+  transform: translateX(-42%) rotate(-12deg) scale(0);
+  pointer-events: none; z-index: 6;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.7));
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 44px; height: 34px;
+}
+.pp-logo-wrap.thematized .pp-seasonal-hat {
+  transform: translateX(-42%) rotate(-12deg) scale(1);
+}
+
+.pp-lights-overlay {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  left: 0;
+  pointer-events: none; z-index: 43;
+}
+.pp-light-strip {
+  position: absolute; left: 16px; right: 16px; height: 20px;
+  pointer-events: none; overflow: visible;
+}
+.pp-light-strip.top { top: 6px; }
+.pp-light-strip.bottom { bottom: 6px; }
+.pp-light-strip svg { width: 100%; height: 20px; display: block; }
+
+.pp-fw-canvas, .pp-fx-screen {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 42;
+}
+
+.pp-particle-nieve {
+  position: absolute; top: -16px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.55));
+  box-shadow: 0 0 6px rgba(255,255,255,0.6);
+  animation: pp-fall-snow linear forwards;
+  will-change: transform;
+}
+@keyframes pp-fall-snow {
+  0% { transform: translate3d(0,0,0); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate3d(var(--drift,28px), 110vh, 0); opacity: .1; }
+}
+
+/* Árbol de Navidad Gigante, hiperdetallado y con luces LED interactivas por CSS */
+.pp-xmas-tree {
+  position: fixed;
+  right: 36px;
+  bottom: 84px;
+  z-index: 40;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+  animation: pp-tree-in 1.4s cubic-bezier(.34,1.4,.64,1) both;
+}
+@keyframes pp-tree-in {
+  from { opacity: 0; transform: translateY(50px) scale(0.65); }
+  to { opacity: 1; transform: none; }
+}
+.pp-xmas-tree .star {
+  animation: pp-star-glow 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes pp-star-glow {
+  0%,100% { opacity: .75; transform: scale(1); filter: drop-shadow(0 0 6px #ffd700); }
+  50% { opacity: 1; transform: scale(1.35); filter: drop-shadow(0 0 16px #ffffff); }
+}
+</style>
+<script>
+(function () {
+  var ID = "navidad";
+  var COLORS = ["#ff334b", "#10b981", "#ffd700", "#ffffff", "#38bdf8", "#f472b6"];
+  var HAT =
+    '<svg viewBox="0 0 72 52" width="44" height="34" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#991b1b"/>' +
+    '<path d="M8 36 C14 22 30 10 44 10 C56 10 64 22 66 34" fill="#ff334b"/>' +
+    '<ellipse cx="38" cy="38" rx="30" ry="7" fill="#f8fafc"/>' +
+    '<circle cx="62" cy="12" r="7" fill="#f8fafc"/></svg>';
+  var esDiaNavidad = (function () {
+    var d = new Date();
+    return d.getMonth() === 11 && d.getDate() === 25;
+  })();
+
+  function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function markLogos() {
+    $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
+      if (el.classList.contains("pp-logo-wrap")) return;
+      el.classList.add("pp-logo-wrap");
+      el.setAttribute("title", "Clic para animar");
+      var icon = el.querySelector("div.w-8, div.w-10");
+      if (icon) {
+        icon.classList.add("pp-logo-icon");
+        if (!icon.querySelector(".pp-seasonal-hat")) {
+          var h = document.createElement("span");
+          h.className = "pp-seasonal-hat";
+          h.innerHTML = HAT;
+          icon.appendChild(h);
+        }
+      }
+    });
+  }
+
+  function triggerIntroAndHold() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      w.classList.remove("pp-logo-progressive-intro", "thematized");
+      void w.offsetWidth;
+      w.classList.add("pp-logo-progressive-intro");
+      setTimeout(function () { w.classList.add("thematized"); }, 8500); // Sombrero aparece cerca del final de la intro de 10s
+      setTimeout(function () { w.classList.remove("pp-logo-progressive-intro"); }, 13000); // 10s intro + 3s espera
+    });
+  }
+
+  window.__ppTriggerLogoAnim = function () { triggerIntroAndHold(); };
+  function bindClicks() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      if (w.getAttribute("data-pp-click") === "1") return;
+      w.setAttribute("data-pp-click", "1");
+      w.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation(); triggerIntroAndHold();
+      });
+    });
+  }
+
+  function makeStripSVG(colors, count) {
+    count = count || 30;
+    var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1400 20">'];
+    parts.push('<path d="M0 10 Q 175 4 350 10 T 700 10 T 1050 10 T 1400 10" fill="none" stroke="rgba(200,200,200,0.4)" stroke-width="1.5"/>');
+    for (var i = 0; i < count; i++) {
+      var x = 25 + (i / (count - 1)) * 1350;
+      var y = 10 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.8;
+      var c = colors[i % colors.length];
+      var delay = (i * 0.08).toFixed(2);
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="4" fill="'+c+'">');
+      parts.push('<animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+      parts.push('<circle cx="'+x+'" cy="'+y+'" r="8" fill="'+c+'" opacity="0.18">');
+      parts.push('<animate attributeName="opacity" values="0.1;0.35;0.1" dur="1.2s" begin="'+delay+'s" repeatCount="indefinite"/>');
+      parts.push('</circle>');
+    }
+    parts.push('</svg>');
+    return parts.join('');
+  }
+
+  function placeLights() {
+    var ov = document.querySelector(".pp-lights-overlay");
+    if (!ov) {
+      ov = document.createElement("div");
+      ov.className = "pp-lights-overlay";
+      ov.setAttribute("aria-hidden", "true");
+      document.body.appendChild(ov);
+    }
+    ov.innerHTML = "";
+    var top = document.createElement("div");
+    top.className = "pp-light-strip top";
+    top.innerHTML = makeStripSVG(COLORS, 32);
+    ov.appendChild(top);
+    var bot = document.createElement("div");
+    bot.className = "pp-light-strip bottom";
+    bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 30);
+    ov.appendChild(bot);
+  }
+
+  function placeTree() {
+    if (document.querySelector(".pp-xmas-tree")) return;
+    var el = document.createElement("div");
+    el.className = "pp-xmas-tree";
+    el.setAttribute("aria-hidden", "true");
+    /* Árbol Gigante Hiperdetallado en SVG Puro sin emojis */
+    el.innerHTML =
+      '<svg width="170" height="230" viewBox="0 0 170 230" xmlns="http://www.w3.org/2000/svg">' +
+      '<defs>' +
+        '<linearGradient id="treeGrad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#10b981"/><stop offset="100%" stop-color="#047857"/></linearGradient>' +
+        '<linearGradient id="treeGrad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#059669"/><stop offset="100%" stop-color="#065f46"/></linearGradient>' +
+        '<linearGradient id="treeGrad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#047857"/><stop offset="100%" stop-color="#064e3b"/></linearGradient>' +
+        '<linearGradient id="treeGrad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#022c22"/></linearGradient>' +
+      '</defs>' +
+      '<polygon points="85,6 130,55 40,55" fill="url(#treeGrad1)"/>' +
+      '<polygon points="85,26 142,95 28,95" fill="url(#treeGrad2)"/>' +
+      '<polygon points="85,58 154,142 16,142" fill="url(#treeGrad3)"/>' +
+      '<polygon points="85,96 164,192 6,192" fill="url(#treeGrad4)"/>' +
+      '<rect x="70" y="192" width="30" height="30" rx="6" fill="#65351b"/>' +
+      '<polygon class="star" points="85,0 89,10 100,11 92,19 94,30 85,24 76,30 78,19 70,11 81,10" fill="#ffd700"/>' +
+      '<circle cx="65" cy="45" r="4.5" fill="#ff334b"/><circle cx="105" cy="50" r="4.5" fill="#ffd700"/>' +
+      '<circle cx="52" cy="82" r="5" fill="#ffffff"/><circle cx="118" cy="76" r="5" fill="#ff334b"/><circle cx="85" cy="70" r="4.5" fill="#ffd700"/>' +
+      '<circle cx="40" cy="122" r="5" fill="#ffd700"/><circle cx="130" cy="116" r="5" fill="#ffffff"/><circle cx="78" cy="108" r="5" fill="#ff334b"/><circle cx="102" cy="126" r="5" fill="#38bdf8"/>' +
+      '<circle cx="28" cy="172" r="5.5" fill="#ff334b"/><circle cx="142" cy="166" r="5.5" fill="#ffd700"/><circle cx="60" cy="160" r="5" fill="#ffffff"/><circle cx="110" cy="178" r="5.5" fill="#38bdf8"/>' +
+      '</svg>';
+    document.body.appendChild(el);
+  }
+
+  function snow() {
+    var layer = document.querySelector(".pp-fx-screen");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "pp-fx-screen";
+      document.body.appendChild(layer);
+    }
+    function flake() {
+      if (document.hidden) return;
+      if (layer.querySelectorAll(".pp-particle-nieve").length > 40) return;
+      var p = document.createElement("span");
+      p.className = "pp-particle-nieve";
+      var size = 2 + Math.random() * 6;
+      p.style.left = Math.random() * 100 + "%";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.setProperty("--drift", (Math.random() * 70 - 20) + "px");
+      p.style.animationDuration = (8 + Math.random() * 10) + "s";
+      layer.appendChild(p);
+      setTimeout(function () { p.remove(); }, 18000);
+    }
+    for (var i = 0; i < 12; i++) flake();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    window.__ppSnowTimer = setInterval(flake, 500);
+  }
+
+  var fwCanvas = null, fwCtx = null, rockets = [], sparks = [], fwRaf = null, fwLast = 0;
+  function ensureFW() {
+    if (fwCanvas && fwCanvas.parentNode) return;
+    fwCanvas = document.createElement("canvas");
+    fwCanvas.className = "pp-fw-canvas";
+    document.body.appendChild(fwCanvas);
+    fwCtx = fwCanvas.getContext("2d", { alpha: true });
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      fwCanvas.width = Math.floor(window.innerWidth * dpr);
+      fwCanvas.height = Math.floor(window.innerHeight * dpr);
+      fwCanvas.style.width = window.innerWidth + "px";
+      fwCanvas.style.height = window.innerHeight + "px";
+      fwCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+  }
+  function launchRocket() {
+    if (!esDiaNavidad) return;
+    ensureFW();
+    rockets.push({
+      x: window.innerWidth * (0.15 + Math.random() * 0.7),
+      y: window.innerHeight + 10,
+      vy: -(8 + Math.random() * 4),
+      targetY: window.innerHeight * (0.1 + Math.random() * 0.35),
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      trail: []
+    });
+  }
+  function explode(x, y, color) {
+    if (sparks.length > 120) return;
+    var n = 18 + Math.floor(Math.random() * 12);
+    for (var i = 0; i < n; i++) {
+      var ang = (Math.PI * 2 * i) / n + Math.random() * 0.2;
+      var spd = 1.8 + Math.random() * 3.8;
+      sparks.push({
+        x: x, y: y, vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        life: 1, decay: 0.012 + Math.random() * 0.012, color: color, size: 1.8 + Math.random() * 1.8
+      });
+    }
+  }
+  function loopFW() {
+    fwRaf = requestAnimationFrame(loopFW);
+    if (!fwCtx) return;
+    var w = window.innerWidth, h = window.innerHeight;
+    fwCtx.clearRect(0, 0, w, h);
+    for (var i = rockets.length - 1; i >= 0; i--) {
+      var r = rockets[i];
+      r.y += r.vy;
+      fwCtx.fillStyle = "#fff";
+      fwCtx.beginPath();
+      fwCtx.arc(r.x, r.y, 2.4, 0, Math.PI * 2);
+      fwCtx.fill();
+      if (r.y <= r.targetY) {
+        explode(r.x, r.y, r.color);
+        rockets.splice(i, 1);
+      }
+    }
+    for (var j = sparks.length - 1; j >= 0; j--) {
+      var p = sparks[j];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.045; p.life -= p.decay;
+      if (p.life <= 0) { sparks.splice(j, 1); continue; }
+      fwCtx.globalAlpha = Math.max(0, p.life * 0.95);
+      fwCtx.fillStyle = p.color;
+      fwCtx.beginPath();
+      fwCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      fwCtx.fill();
+    }
+    fwCtx.globalAlpha = 1;
+  }
+  function randomLaunch() {
+    if (!esDiaNavidad || document.hidden) return;
+    var now = Date.now();
+    if (now - fwLast < 650) return;
+    fwLast = now;
+    launchRocket();
+  }
+  function startFW() {
+    if (!esDiaNavidad) return;
+    ensureFW();
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    loopFW();
+    if (window.__ppXmasFWTimer) clearInterval(window.__ppXmasFWTimer);
+    window.__ppXmasFWTimer = setInterval(randomLaunch, 1300);
+  }
+  function stopFW() {
+    if (window.__ppXmasFWTimer) clearInterval(window.__ppXmasFWTimer);
+    if (fwRaf) cancelAnimationFrame(fwRaf);
+    rockets = []; sparks = [];
+    if (fwCanvas && fwCanvas.parentNode) fwCanvas.parentNode.removeChild(fwCanvas);
+  }
+
+  window.__ppSeasonalVisDraw = function (ctx, canvas, data, api) {
+    var w = canvas.width, h = canvas.height, n = 16, muestra = api.muestra, sens = api.sensitivity || 1.6;
+    for (var j = 0; j < n; j++) {
+      var prom = muestra(data, j, n);
+      var level = Math.min(1, (prom / 255) * sens);
+      var x2 = ((j + 0.5) / n) * w;
+      var y2 = h * 0.3;
+      var col = COLORS[j % COLORS.length];
+      ctx.fillStyle = col;
+      ctx.shadowColor = col;
+      ctx.shadowBlur = level * 12;
+      ctx.beginPath(); ctx.arc(x2, y2, 3 + level * 7, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    return true;
+  };
+
+  function enableVis() {
+    function tryOn() {
+      if (window.ProPlayerVis && window.ProPlayerVis.forceMount) { window.ProPlayerVis.forceMount(); return true; }
+      return false;
+    }
+    if (!tryOn()) { var n = 0; var iv = setInterval(function () { if (tryOn() || ++n > 40) clearInterval(iv); }, 250); }
+  }
+
+  markLogos(); bindClicks(); placeLights(); placeTree(); snow(); enableVis(); startFW();
+  setTimeout(function () { triggerIntroAndHold(); }, 400);
+
+  if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e) {}
+  window.__ppLogoObserver = new MutationObserver(function () {
+    markLogos(); bindClicks();
+  });
+  window.__ppLogoObserver.observe(document.body, { childList: true, subtree: true });
+
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    window.__ppSeasonalVisDraw = null; stopFW();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e2) {}
+    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-fw-canvas, .pp-xmas-tree").forEach(function (e) { e.remove(); });
+  };
+})();
+</script>
