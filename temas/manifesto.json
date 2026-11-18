@@ -6,7 +6,7 @@
       "id": "navidad",
       "nombre": "Navidad",
       "archivo": "navidad.html",
-      "desde": "2025-12-01",
+      "desde": "2025-11-18",
       "hasta": "2026-01-06"
     },
     {
@@ -16,20 +16,3 @@
       "desde": "2025-11-18",
       "hasta": "2026-01-05"
     },
-    {
-      "id": "halloween",
-      "nombre": "Halloween",
-      "archivo": "halloween.html",
-      "desde": "2025-10-15",
-      "hasta": "2025-11-02"
-    },
-    {
-      "id": "san_valentin",
-      "nombre": "San Valentín",
-      "archivo": "san_valentin.html",
-      "desde": "2026-02-01",
-      "hasta": "2026-02-15"
-    }
-  ],
-  "nota": "Los .html de tema SOLO se sirven desde GitHub. Sube este manifesto y los html a la carpeta temas/ del repo."
-}
