@@ -1,0 +1,300 @@
+<!-- Navidad: Árbol grande y detallado, luces alineadas y fuegos optimizados sin lag -->
+<style id="pp-tema-style-navidad">
+html.tema-navidad {
+  --accent: #d4243b;
+  --accent-glow: rgba(212, 36, 59, 0.5);
+  --bg-main: #050a07;
+  --bg-side: #0a130e;
+  --bg-secondary: #163022;
+  --glass-border: rgba(13, 138, 69, 0.3);
+}
+html.tema-navidad body {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(13,138,69,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(212,36,59,0.12) 0%, transparent 50%),
+    var(--bg-main) !important;
+}
+html.tema-navidad aside.sidebar {
+  background: linear-gradient(180deg, rgba(13,138,69,0.14) 0%, transparent 120px), var(--bg-side) !important;
+  border-right: 1px solid rgba(13, 138, 69, 0.35) !important;
+}
+html.tema-navidad .nav-link.active {
+  background: linear-gradient(90deg, rgba(212,36,59,0.28), rgba(13,138,69,0.15)) !important;
+  box-shadow: inset 3px 0 0 #d4243b;
+}
+html.tema-navidad .nav-link.active .nav-icon { color: #d4243b !important; }
+html.tema-navidad .main-content {
+  background: linear-gradient(180deg, rgba(18,40,28,0.95) 0%, var(--bg-main) 420px) !important;
+}
+html.tema-navidad .album-card {
+  background: rgba(18, 40, 28, 0.65) !important;
+  border: 1px solid rgba(13,138,69,0.25);
+  transition: all 0.3s ease;
+}
+html.tema-navidad .album-card:hover {
+  border-color: rgba(212,36,59,0.5);
+  box-shadow: 0 14px 36px rgba(13,138,69,0.3);
+  transform: translateY(-4px);
+}
+html.tema-navidad .card-play-btn, html.tema-navidad .btn-play-big {
+  background: linear-gradient(135deg, #d4243b, #a01a2e) !important;
+  box-shadow: 0 6px 24px rgba(212,36,59,0.5) !important;
+}
+html.tema-navidad .player-bar {
+  background: rgba(6, 12, 9, 0.96) !important;
+  border-top: 1px solid rgba(13,138,69,0.35) !important;
+}
+html.tema-navidad .btn-play-bar {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+  color: #14532d !important;
+}
+html.tema-navidad #seek-slider {
+  background: linear-gradient(to right, #d4243b var(--seek-progress), #1a3024 var(--seek-progress)) !important;
+}
+html.tema-navidad #volume-slider {
+  background: linear-gradient(to right, #0d8a45 var(--volume-progress), #1a3024 var(--volume-progress)) !important;
+}
+html.tema-navidad #auth-screen {
+  background: radial-gradient(ellipse at 50% 20%, rgba(13,138,69,0.22), transparent 50%), #050a07 !important;
+}
+html.tema-navidad .auth-btn { background: linear-gradient(135deg, #d4243b, #a01a2e) !important; }
+html.tema-navidad #loading-screen {
+  background: radial-gradient(circle at 50% 35%, #153528 0%, #050a07 65%) !important;
+}
+html.tema-navidad .custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0d8a45, #d4243b) !important;
+}
+html.tema-navidad .pp-logo-icon,
+html.tema-navidad aside.sidebar .w-8,
+html.tema-navidad #auth-screen .w-10,
+html.tema-navidad #loading-screen .w-10 {
+  background: linear-gradient(135deg, #d4243b, #0d8a45) !important;
+}
+.pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
+.pp-logo-icon { position: relative; overflow: visible !important; }
+
+.pp-seasonal-hat {
+  position: absolute; top: -18px; left: 50%;
+  transform: translateX(-42%) rotate(-12deg);
+  pointer-events: none; z-index: 6;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+  animation: pp-hat-pop .6s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .5s; width: 36px; height: 28px;
+}
+@keyframes pp-hat-pop {
+  from { opacity: 0; transform: translateX(-42%) translateY(-16px) rotate(-30deg) scale(.3); }
+  to   { opacity: 1; transform: translateX(-42%) rotate(-12deg) scale(1); }
+}
+
+.pp-lights-overlay {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  left: var(--pp-sidebar-w, 220px);
+  pointer-events: none; z-index: 43;
+}
+.pp-light-strip {
+  position: absolute; left: 8px; right: 8px; height: 16px;
+  pointer-events: none; overflow: visible;
+}
+.pp-light-strip.top { top: 4px; }
+.pp-light-strip.bottom { bottom: 4px; }
+.pp-light-strip svg { width: 100%; height: 16px; display: block; }
+.pp-fw-canvas, .pp-fx-screen {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 42;
+}
+.pp-particle-nieve {
+  position: absolute; top: -16px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.5));
+  animation: pp-fall-snow linear forwards;
+  will-change: transform;
+}
+@keyframes pp-fall-snow {
+  0% { transform: translate3d(0,0,0); opacity: 0; }
+  8% { opacity: 1; }
+  100% { transform: translate3d(var(--drift,24px), 110vh, 0); opacity: .05; }
+}
+
+.pp-xmas-tree {
+  position: fixed;
+  right: 28px;
+  bottom: 80px;
+  z-index: 40;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.7));
+  animation: pp-tree-in 0.9s cubic-bezier(.34,1.4,.64,1) both;
+}
+@keyframes pp-tree-in {
+  from { opacity: 0; transform: translateY(30px) scale(.8); }
+  to { opacity: 1; transform: none; }
+}
+.pp-xmas-tree .star-glow {
+  animation: pp-star-pulse 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes pp-star-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); filter: drop-shadow(0 0 10px #f5c542); }
+}
+</style>
+<script>
+(function () {
+  var ID = "navidad";
+  var COLORS = ["#d4243b", "#0d8a45", "#f5c542", "#ffffff"];
+  var HAT =
+    '<svg viewBox="0 0 72 52" width="36" height="28" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#b91c1c"/>' +
+    '<path d="M8 36 C14 22 30 10 44 10 C56 10 64 22 66 34" fill="#d4243b"/>' +
+    '<ellipse cx="38" cy="38" rx="30" ry="7" fill="#f8fafc"/>' +
+    '<circle cx="62" cy="12" r="7" fill="#f8fafc"/></svg>';
+
+  function runNavidadTheme() {
+    function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+    
+    function markLogos() {
+      $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
+        if (!el.classList.contains("pp-logo-wrap")) {
+          el.classList.add("pp-logo-wrap");
+          el.setAttribute("title", "ProPlayer Navidad");
+        }
+        var icon = el.querySelector("div.w-8, div.w-10");
+        if (icon && !icon.classList.contains("pp-logo-icon")) {
+          icon.classList.add("pp-logo-icon");
+        }
+      });
+    }
+
+    function putHats() {
+      $(".pp-logo-wrap").forEach(function (w) {
+        var icon = w.querySelector(".pp-logo-icon") || w.querySelector("div");
+        if (!icon || icon.querySelector(".pp-seasonal-hat")) return;
+        icon.style.position = icon.style.position || "relative";
+        var h = document.createElement("span");
+        h.className = "pp-seasonal-hat";
+        h.innerHTML = HAT;
+        icon.appendChild(h);
+      });
+    }
+
+    function sidebarWidth() {
+      var side = document.querySelector("aside.sidebar");
+      if (!side || side.offsetParent === null) return 0;
+      return Math.ceil(side.getBoundingClientRect().width) || 220;
+    }
+
+    function makeStripSVG(colors, count) {
+      count = count || 22;
+      var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 16">'];
+      parts.push('<path d="M0 9 Q 125 5 250 9 T 500 9 T 750 9 T 1000 9" fill="none" stroke="rgba(200,200,200,0.4)" stroke-width="1.3"/>');
+      for (var i = 0; i < count; i++) {
+        var x = 18 + (i / (count - 1)) * 964;
+        var y = 9 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.2;
+        var c = colors[i % colors.length];
+        var delay = (i * 0.1).toFixed(2);
+        parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="'+c+'">');
+        parts.push('<animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="'+delay+'s" repeatCount="indefinite"/>');
+        parts.push('</circle>');
+      }
+      parts.push('</svg>');
+      return parts.join('');
+    }
+
+    function placeLights() {
+      document.documentElement.style.setProperty("--pp-sidebar-w", sidebarWidth() + "px");
+      var ov = document.querySelector(".pp-lights-overlay");
+      if (!ov) {
+        ov = document.createElement("div");
+        ov.className = "pp-lights-overlay";
+        document.body.appendChild(ov);
+      }
+      ov.innerHTML = "";
+      var top = document.createElement("div");
+      top.className = "pp-light-strip top";
+      top.innerHTML = makeStripSVG(COLORS, 24);
+      ov.appendChild(top);
+      var bot = document.createElement("div");
+      bot.className = "pp-light-strip bottom";
+      bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 22);
+      ov.appendChild(bot);
+    }
+
+    function placeTree() {
+      if (document.querySelector(".pp-xmas-tree")) return;
+      var el = document.createElement("div");
+      el.className = "pp-xmas-tree";
+      el.innerHTML =
+        '<svg width="110" height="150" viewBox="0 0 110 150" xmlns="http://www.w3.org/2000/svg">' +
+        '<polygon points="55,8 82,42 28,42" fill="#0d8a45"/>' +
+        '<polygon points="55,24 92,72 18,72" fill="#0b7a3c"/>' +
+        '<polygon points="55,48 100,104 10,104" fill="#0a6b35"/>' +
+        '<polygon points="55,76 106,132 4,132" fill="#08572b"/>' +
+        '<rect x="46" y="132" width="18" height="18" rx="3" fill="#5a3319"/>' +
+        '<polygon class="star-glow" points="55,0 57,5 62,6 58,10 59,15 55,12 51,15 52,10 48,6 53,5" fill="#f5c542"/>' +
+        '<circle cx="42" cy="52" r="3.6" fill="#d4243b"/>' +
+        '<circle cx="68" cy="58" r="3.6" fill="#f5c542"/>' +
+        '<circle cx="55" cy="80" r="3.6" fill="#ffffff"/>' +
+        '<circle cx="32" cy="90" r="3.6" fill="#d4243b"/>' +
+        '<circle cx="78" cy="94" r="3.6" fill="#f5c542"/>' +
+        '<circle cx="45" cy="112" r="3.6" fill="#f5c542"/>' +
+        '<circle cx="65" cy="116" r="3.6" fill="#d4243b"/>' +
+        '<circle cx="66" cy="36" r="2.8" fill="#ffffff"/>' +
+        '<circle cx="44" cy="32" r="2.8" fill="#f5c542"/>' +
+        '</svg>';
+      document.body.appendChild(el);
+    }
+
+    function snow() {
+      var layer = document.querySelector(".pp-fx-screen");
+      if (!layer) {
+        layer = document.createElement("div");
+        layer.className = "pp-fx-screen";
+        document.body.appendChild(layer);
+      }
+      function flake() {
+        if (document.hidden) return;
+        if (layer.querySelectorAll(".pp-particle-nieve").length > 40) return;
+        var p = document.createElement("span");
+        p.className = "pp-particle-nieve";
+        var size = 2 + Math.random() * 5;
+        p.style.left = Math.random() * 100 + "%";
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.setProperty("--drift", (Math.random() * 60 - 20) + "px");
+        p.style.animationDuration = (8 + Math.random() * 10) + "s";
+        layer.appendChild(p);
+        setTimeout(function () { p.remove(); }, 18000);
+      }
+      for (var i = 0; i < 12; i++) flake();
+      if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+      window.__ppSnowTimer = setInterval(flake, 500);
+    }
+
+    markLogos();
+    putHats();
+    placeLights();
+    placeTree();
+    snow();
+
+    if (!window.__ppNavidadObserver) {
+      window.__ppNavidadObserver = new MutationObserver(function () {
+        markLogos();
+        putHats();
+      });
+      window.__ppNavidadObserver.observe(document.body, { childList: true, subtree: true });
+    }
+  }
+
+  runNavidadTheme();
+  setTimeout(runNavidadTheme, 300);
+  setTimeout(runNavidadTheme, 800);
+
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppNavidadObserver) {
+      try { window.__ppNavidadObserver.disconnect(); } catch (e) {}
+      window.__ppNavidadObserver = null;
+    }
+    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree").forEach(function (e) { e.remove(); });
+  };
+})();
+</script>
