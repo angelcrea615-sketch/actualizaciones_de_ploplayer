@@ -1,0 +1,452 @@
+<!-- ProPlayer tema NAVIDAD — inmersivo en todo el reproductor -->
+<style id="pp-tema-style-navidad">
+/* ===== Variables globales ===== */
+html.tema-navidad {
+  --accent: #d4243b;
+  --accent-glow: rgba(212, 36, 59, 0.45);
+  --accent-seasonal: #0d8a45;
+  --bg-main: #050a07;
+  --bg-side: #0a130e;
+  --bg-card: rgba(18, 36, 24, 0.72);
+  --bg-secondary: #163022;
+  --glass-border: rgba(13, 138, 69, 0.22);
+  --text-main: #f4f7f5;
+  --text-dim: #8aa396;
+}
+html.tema-navidad body {
+  background:
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(13,138,69,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(212,36,59,0.12) 0%, transparent 50%),
+    var(--bg-main) !important;
+}
+html.tema-navidad .app-container { background: transparent; }
+
+/* ===== Sidebar ===== */
+html.tema-navidad aside.sidebar {
+  background:
+    linear-gradient(180deg, rgba(13,138,69,0.18) 0%, transparent 140px),
+    linear-gradient(90deg, rgba(212,36,59,0.06), transparent 40%),
+    var(--bg-side) !important;
+  border-right: 1px solid rgba(13, 138, 69, 0.28) !important;
+  position: relative;
+  box-shadow: 4px 0 24px rgba(0,0,0,0.35);
+}
+html.tema-navidad aside.sidebar::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 5px; z-index: 3;
+  background: repeating-linear-gradient(90deg,
+    #d4243b 0 14px, #0d8a45 14px 28px, #f5f5f5 28px 34px, #d4243b 34px 48px);
+  box-shadow: 0 2px 12px rgba(212,36,59,0.35);
+}
+html.tema-navidad aside.sidebar::after {
+  content: "";
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px; z-index: 3;
+  background: linear-gradient(90deg, #0d8a45, #d4243b, #0d8a45);
+  opacity: 0.7;
+}
+html.tema-navidad .nav-link:hover {
+  background: rgba(13, 138, 69, 0.12) !important;
+  color: #e8fff0 !important;
+}
+html.tema-navidad .nav-link.active {
+  background: linear-gradient(90deg, rgba(212,36,59,0.22), rgba(13,138,69,0.14)) !important;
+  box-shadow: inset 3px 0 0 #d4243b;
+}
+html.tema-navidad .nav-link.active .nav-icon { color: #d4243b !important; }
+html.tema-navidad .playlist-nav-item:hover {
+  background: rgba(212, 36, 59, 0.1) !important;
+}
+html.tema-navidad .playlist-nav-item.active {
+  background: rgba(13, 138, 69, 0.15) !important;
+  color: #fff !important;
+}
+html.tema-navidad .pl-thumb {
+  background: linear-gradient(135deg, #163022, #0d8a45) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 1px rgba(13,138,69,0.4);
+}
+
+/* ===== Contenido principal ===== */
+html.tema-navidad .main-content {
+  background:
+    linear-gradient(180deg, rgba(18,40,28,0.95) 0%, var(--bg-main) 420px) !important;
+}
+html.tema-navidad .section-title {
+  background: linear-gradient(90deg, #fff, #b8e6c8);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html.tema-navidad #home-version-watermark {
+  background: linear-gradient(90deg, #d4243b, #0d8a45, #d4243b) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  color: transparent !important; opacity: 0.12 !important;
+}
+
+/* ===== Búsqueda ===== */
+html.tema-navidad .search-bar {
+  border-bottom: 1px solid rgba(13,138,69,0.2) !important;
+  background: linear-gradient(180deg, rgba(10,20,14,0.9), transparent) !important;
+}
+html.tema-navidad .search-wrap input {
+  border-color: rgba(13,138,69,0.25) !important;
+  background: rgba(13,138,69,0.08) !important;
+}
+html.tema-navidad .search-wrap input:focus {
+  border-color: #d4243b !important;
+  box-shadow: 0 0 0 3px rgba(212,36,59,0.15);
+  background: rgba(212,36,59,0.06) !important;
+}
+html.tema-navidad .sr-item:hover { background: rgba(13,138,69,0.12) !important; }
+
+/* ===== Cards y listas ===== */
+html.tema-navidad .album-card {
+  background: rgba(18, 40, 28, 0.55) !important;
+  border: 1px solid rgba(13,138,69,0.15);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+html.tema-navidad .album-card:hover {
+  transform: translateY(-5px) scale(1.025);
+  background: rgba(22, 50, 34, 0.75) !important;
+  border-color: rgba(212,36,59,0.35);
+  box-shadow: 0 12px 36px rgba(13,138,69,0.25), 0 0 0 1px rgba(212,36,59,0.2);
+}
+html.tema-navidad .card-play-btn {
+  background: linear-gradient(135deg, #d4243b, #a01a2e) !important;
+  box-shadow: 0 4px 16px rgba(212,36,59,0.5) !important;
+}
+html.tema-navidad .song-row-pl:hover,
+html.tema-navidad .track-row:hover {
+  background: linear-gradient(90deg, rgba(212,36,59,0.1), rgba(13,138,69,0.08)) !important;
+}
+html.tema-navidad .song-row-pl.playing,
+html.tema-navidad .song-row-pl.active {
+  background: rgba(13,138,69,0.12) !important;
+  box-shadow: inset 3px 0 0 #d4243b;
+}
+html.tema-navidad .btn-play-big {
+  background: linear-gradient(135deg, #d4243b, #c41e3a) !important;
+  box-shadow: 0 6px 28px rgba(212,36,59,0.55) !important;
+}
+html.tema-navidad .btn-play-big:hover {
+  background: linear-gradient(135deg, #e8354c, #d4243b) !important;
+  transform: scale(1.08);
+}
+
+/* ===== Barra del reproductor (footer) ===== */
+html.tema-navidad .player-bar {
+  background:
+    linear-gradient(180deg, rgba(13,138,69,0.12) 0%, transparent 40%),
+    rgba(6, 12, 9, 0.97) !important;
+  border-top: 2px solid transparent !important;
+  border-image: linear-gradient(90deg, #0d8a45, #d4243b, #0d8a45, #d4243b, #0d8a45) 1 !important;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.45), 0 -1px 0 rgba(13,138,69,0.3);
+  backdrop-filter: blur(24px) !important;
+}
+html.tema-navidad .btn-play-bar {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+  color: #14532d !important;
+  box-shadow: 0 0 16px rgba(13,138,69,0.4);
+}
+html.tema-navidad .btn-play-bar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 22px rgba(212,36,59,0.45);
+}
+html.tema-navidad #seek-slider {
+  background: linear-gradient(to right, #d4243b var(--seek-progress), #1a3024 var(--seek-progress)) !important;
+}
+html.tema-navidad #volume-slider {
+  background: linear-gradient(to right, #0d8a45 var(--volume-progress), #1a3024 var(--volume-progress)) !important;
+}
+html.tema-navidad #footer-art {
+  box-shadow: 0 0 0 2px rgba(212,36,59,0.35), 0 4px 12px rgba(0,0,0,0.4);
+  border-radius: 8px;
+}
+
+/* ===== Auth / loading ===== */
+html.tema-navidad #auth-screen {
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(13,138,69,0.2), transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(212,36,59,0.12), transparent 40%),
+    #050a07 !important;
+}
+html.tema-navidad .auth-card {
+  border: 1px solid rgba(13,138,69,0.3) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(13,138,69,0.1) !important;
+  background: rgba(10, 18, 14, 0.92) !important;
+}
+html.tema-navidad .auth-btn {
+  background: linear-gradient(135deg, #d4243b, #a01a2e) !important;
+  box-shadow: 0 4px 20px rgba(212,36,59,0.4);
+}
+html.tema-navidad .auth-tab.active { border-color: #d4243b !important; color: #fff !important; }
+html.tema-navidad #loading-screen {
+  background:
+    radial-gradient(circle at 50% 35%, #153528 0%, #050a07 65%) !important;
+}
+
+/* ===== Scrollbar ===== */
+html.tema-navidad .custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0d8a45, #d4243b) !important;
+  border-radius: 10px;
+}
+
+/* ===== Modales ===== */
+html.tema-navidad .overlay-card {
+  border-color: rgba(13,138,69,0.3) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(212,36,59,0.15);
+}
+html.tema-navidad .modal-input:focus { border-color: #d4243b !important; }
+
+/* ===== Logo ===== */
+.pp-logo-wrap {
+  position: relative; display: inline-flex; align-items: center; gap: .75rem;
+  cursor: pointer; user-select: none;
+}
+.pp-logo-icon { position: relative; overflow: visible !important; transition: filter .2s; }
+.pp-logo-wrap:hover .pp-logo-icon {
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(212,36,59,.6));
+}
+html.tema-navidad .pp-logo-icon,
+html.tema-navidad aside.sidebar .w-8,
+html.tema-navidad #auth-screen .w-10,
+html.tema-navidad #loading-screen .w-10 {
+  background: linear-gradient(135deg, #d4243b, #0d8a45) !important;
+  box-shadow: 0 0 14px rgba(212,36,59,0.4);
+}
+.pp-seasonal-hat {
+  position: absolute; top: -16px; left: 50%;
+  transform: translateX(-40%) rotate(-14deg);
+  pointer-events: none; z-index: 6;
+  filter: drop-shadow(0 3px 5px rgba(0,0,0,.5));
+  animation: pp-hat-pop .6s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .85s; width: 34px; height: 26px;
+}
+@keyframes pp-hat-pop {
+  from { opacity: 0; transform: translateX(-40%) translateY(-18px) rotate(-30deg) scale(.4); }
+  to   { opacity: 1; transform: translateX(-40%) rotate(-14deg) scale(1); }
+}
+.pp-logo-spin-hat .pp-logo-icon,
+.pp-logo-spin-once .pp-logo-icon {
+  animation: pp-logo-flip 1.2s cubic-bezier(.45,.05,.55,.95) both;
+  transform-style: preserve-3d;
+}
+@keyframes pp-logo-flip {
+  0%   { transform: rotateY(0) scale(1); }
+  25%  { transform: rotateY(90deg) scale(1.14); }
+  50%  { transform: rotateY(180deg) scale(1.06); }
+  75%  { transform: rotateY(270deg) scale(1.12); }
+  100% { transform: rotateY(360deg) scale(1); }
+}
+
+/* Luces loading */
+.pp-xmas-lights { display: flex; gap: 10px; margin-top: 8px; justify-content: center; }
+.pp-xmas-lights span {
+  width: 9px; height: 9px; border-radius: 50%;
+  animation: pp-bulb 1.3s ease-in-out infinite;
+  box-shadow: 0 0 10px currentColor;
+}
+.pp-xmas-lights span:nth-child(1) { color:#d4243b; background:#d4243b; animation-delay:0s; }
+.pp-xmas-lights span:nth-child(2) { color:#0d8a45; background:#0d8a45; animation-delay:.2s; }
+.pp-xmas-lights span:nth-child(3) { color:#f5c542; background:#f5c542; animation-delay:.4s; }
+.pp-xmas-lights span:nth-child(4) { color:#d4243b; background:#d4243b; animation-delay:.6s; }
+.pp-xmas-lights span:nth-child(5) { color:#0d8a45; background:#0d8a45; animation-delay:.8s; }
+@keyframes pp-bulb {
+  0%,100% { opacity:.3; transform:scale(.8); }
+  50% { opacity:1; transform:scale(1.2); }
+}
+
+/* Efectos */
+.pp-seasonal-fx-layer {
+  position: fixed; inset: 0; pointer-events: none; z-index: 45; overflow: hidden;
+}
+.pp-particle-nieve {
+  position: absolute; top: -24px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.5));
+  box-shadow: 0 0 6px rgba(255,255,255,.4);
+  animation: pp-fall-snow linear forwards;
+}
+@keyframes pp-fall-snow {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  5% { opacity: 1; }
+  100% { transform: translateY(110vh) translateX(var(--drift,40px)); opacity: .05; }
+}
+.pp-sparkle {
+  position: absolute; width: 4px; height: 4px; background: #fff; border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255,220,150,.85);
+  animation: pp-spark 1.6s ease-out forwards; pointer-events: none;
+}
+@keyframes pp-spark {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(2.8) translateY(-24px); opacity: 0; }
+}
+/* Vignette festiva sutil */
+.pp-xmas-vignette {
+  position: fixed; inset: 0; pointer-events: none; z-index: 44;
+  background:
+    radial-gradient(ellipse at center, transparent 50%, rgba(5,10,7,0.35) 100%),
+    linear-gradient(180deg, rgba(13,138,69,0.04) 0%, transparent 18%, transparent 82%, rgba(212,36,59,0.05) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-logo-spin-hat .pp-logo-icon, .pp-logo-spin-once .pp-logo-icon,
+  .pp-seasonal-hat, .pp-particle-nieve, .pp-xmas-lights span, .pp-sparkle {
+    animation: none !important;
+  }
+}
+</style>
+<script>
+(function () {
+  var ID = "navidad";
+  var HAT =
+    '<svg viewBox="0 0 72 52" width="34" height="26" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#b91c1c"/>' +
+    '<path d="M8 36 C14 22 30 10 44 10 C56 10 64 22 66 34" fill="#d4243b"/>' +
+    '<ellipse cx="38" cy="38" rx="30" ry="7" fill="#f8fafc"/>' +
+    '<ellipse cx="38" cy="36.5" rx="28" ry="5" fill="#e2e8f0"/>' +
+    '<circle cx="62" cy="12" r="7" fill="#f8fafc"/>' +
+    '<circle cx="62" cy="12" r="4.5" fill="#fee2e2"/>' +
+    '</svg>';
+
+  function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+
+  function markLogos() {
+    $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
+      el.classList.add("pp-logo-wrap");
+      el.setAttribute("title", "Clic para animar el logo");
+      var icon = el.querySelector("div.w-8, div.w-10");
+      if (icon) icon.classList.add("pp-logo-icon");
+    });
+  }
+  function putHats() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      var icon = w.querySelector(".pp-logo-icon") || w.querySelector("div");
+      if (!icon || icon.querySelector(".pp-seasonal-hat")) return;
+      icon.style.position = icon.style.position || "relative";
+      var h = document.createElement("span");
+      h.className = "pp-seasonal-hat";
+      h.setAttribute("aria-hidden", "true");
+      h.innerHTML = HAT;
+      icon.appendChild(h);
+    });
+  }
+  function spark(el) {
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    var layer = document.querySelector(".pp-seasonal-fx-layer") || document.body;
+    for (var i = 0; i < 10; i++) {
+      var s = document.createElement("span");
+      s.className = "pp-sparkle";
+      s.style.left = r.left + r.width / 2 + (Math.random() - 0.5) * 56 + "px";
+      s.style.top = r.top + r.height / 2 + (Math.random() - 0.5) * 40 + "px";
+      layer.appendChild(s);
+      (function (n) { setTimeout(function () { n.remove(); }, 1800); })(s);
+    }
+  }
+  function spin(wrap) {
+    var list = wrap ? [wrap] : $(".pp-logo-wrap");
+    list.forEach(function (w) {
+      w.classList.remove("pp-logo-spin-hat", "pp-logo-spin-once");
+      void w.offsetWidth;
+      w.classList.add("pp-logo-spin-once");
+      spark(w.querySelector(".pp-logo-icon") || w);
+      setTimeout(function () { w.classList.remove("pp-logo-spin-once"); }, 1300);
+    });
+  }
+  window.__ppTriggerLogoAnim = function (w) { spin(w || null); };
+
+  function bindClicks() {
+    $(".pp-logo-wrap").forEach(function (w) {
+      if (w.getAttribute("data-pp-click") === "1") return;
+      w.setAttribute("data-pp-click", "1");
+      w.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        spin(w);
+      });
+    });
+  }
+
+  function lights() {
+    var ls = document.getElementById("loading-screen");
+    if (!ls || ls.querySelector(".pp-xmas-lights")) return;
+    var row = document.createElement("div");
+    row.className = "pp-xmas-lights";
+    row.innerHTML = "<span></span><span></span><span></span><span></span><span></span>";
+    var ring = ls.querySelector(".loader-ring");
+    if (ring) ring.parentNode.insertBefore(row, ring.nextSibling);
+    else ls.appendChild(row);
+  }
+
+  function snow() {
+    var layer = document.querySelector(".pp-seasonal-fx-layer");
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "pp-seasonal-fx-layer";
+      document.body.appendChild(layer);
+    }
+    function flake() {
+      if (document.hidden) return;
+      if (layer.querySelectorAll(".pp-particle-nieve").length > 70) return;
+      var p = document.createElement("span");
+      p.className = "pp-particle-nieve";
+      var size = 2 + Math.random() * 8;
+      p.style.left = Math.random() * 100 + "%";
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+      p.style.setProperty("--drift", (Math.random() * 90 - 25) + "px");
+      p.style.animationDuration = (6 + Math.random() * 11) + "s";
+      p.style.animationDelay = Math.random() * 2 + "s";
+      layer.appendChild(p);
+      setTimeout(function () { p.remove(); }, 19000);
+    }
+    for (var i = 0; i < 24; i++) flake();
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    window.__ppSnowTimer = setInterval(flake, 380);
+  }
+
+  function vignette() {
+    if (document.querySelector(".pp-xmas-vignette")) return;
+    var v = document.createElement("div");
+    v.className = "pp-xmas-vignette";
+    v.setAttribute("aria-hidden", "true");
+    document.body.appendChild(v);
+  }
+
+  // tint indigo logo boxes
+  markLogos();
+  putHats();
+  bindClicks();
+  lights();
+  snow();
+  vignette();
+
+  setTimeout(function () {
+    $(".pp-logo-wrap").forEach(function (w) {
+      w.classList.add("pp-logo-spin-hat");
+      setTimeout(function () { w.classList.remove("pp-logo-spin-hat"); }, 1400);
+    });
+  }, 400);
+
+  if (window.__ppLogoRepeat) clearInterval(window.__ppLogoRepeat);
+  window.__ppLogoRepeat = setInterval(function () {
+    if (window.__ppTriggerLogoAnim) window.__ppTriggerLogoAnim();
+  }, 8 * 60 * 1000);
+
+  if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e) {}
+  window.__ppLogoObserver = new MutationObserver(function () {
+    markLogos(); putHats(); bindClicks();
+  });
+  window.__ppLogoObserver.observe(document.body, { childList: true, subtree: true });
+
+  window.__ppTemaCleanup = window.__ppTemaCleanup || {};
+  window.__ppTemaCleanup[ID] = function () {
+    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
+    if (window.__ppLogoRepeat) clearInterval(window.__ppLogoRepeat);
+    if (window.__ppLogoObserver) try { window.__ppLogoObserver.disconnect(); } catch (e2) {}
+    $(".pp-seasonal-hat, .pp-seasonal-fx-layer, .pp-xmas-lights, .pp-sparkle, .pp-xmas-vignette").forEach(function (e) { e.remove(); });
+    $(".pp-logo-wrap").forEach(function (w) {
+      w.classList.remove("pp-logo-spin-hat", "pp-logo-spin-once");
+      w.removeAttribute("data-pp-click");
+    });
+    window.__ppTriggerLogoAnim = null;
+  };
+})();
+</script>
