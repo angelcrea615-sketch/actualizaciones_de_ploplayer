@@ -98,25 +98,10 @@
       }
     },
     {
-      "id": "autumn-late",
-      "name": "Otoño tardío",
-      "months": [
-        11
-      ],
-      "html": "autumn-late.html",
-      "theme": {
-        "bg": "#17100b",
-        "side": "#281b12",
-        "accent": "#d97706",
-        "text": "#fffbeb",
-        "glow": "rgba(217,119,6,.28)"
-      }
-    },
-    {
       "id": "christmas",
       "name": "Navidad",
       "months": [
-        12
+        11
       ],
       "html": "christmas.html",
       "theme": {
