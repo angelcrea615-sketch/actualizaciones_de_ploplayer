@@ -1,4 +1,4 @@
-<!-- Navidad: Árbol superior al volumen, contadores grandes altamente tematizados, regalos premium, 5 modos de luces, más nieve y cero emojis -->
+<!-- Navidad optimizada: pro visual + bajo consumo -->
 <style id="pp-tema-style-navidad">
 html.tema-navidad {
   --accent: #d4243b;
@@ -10,39 +10,40 @@ html.tema-navidad {
 }
 html.tema-navidad body {
   background:
-    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(13,138,69,0.2) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(212,36,59,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 50% at 50% -10%, rgba(13,138,69,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, rgba(212,36,59,0.10) 0%, transparent 50%),
     var(--bg-main) !important;
 }
 html.tema-navidad aside.sidebar {
-  background: linear-gradient(180deg, rgba(13,138,69,0.14) 0%, transparent 120px), var(--bg-side) !important;
-  border-right: 1px solid rgba(13, 138, 69, 0.35) !important;
+  background: linear-gradient(180deg, rgba(13,138,69,0.12) 0%, transparent 120px), var(--bg-side) !important;
+  border-right: 1px solid rgba(13, 138, 69, 0.3) !important;
 }
 html.tema-navidad .nav-link.active {
-  background: linear-gradient(90deg, rgba(212,36,59,0.28), rgba(13,138,69,0.15)) !important;
+  background: linear-gradient(90deg, rgba(212,36,59,0.25), rgba(13,138,69,0.12)) !important;
   box-shadow: inset 3px 0 0 #d4243b;
 }
 html.tema-navidad .nav-link.active .nav-icon { color: #d4243b !important; }
 html.tema-navidad .main-content {
-  background: linear-gradient(180deg, rgba(18,40,28,0.95) 0%, var(--bg-main) 420px) !important;
+  background: linear-gradient(180deg, rgba(18,40,28,0.92) 0%, var(--bg-main) 420px) !important;
 }
 html.tema-navidad .album-card {
-  background: rgba(18, 40, 28, 0.65) !important;
-  border: 1px solid rgba(13,138,69,0.25);
-  transition: all 0.3s ease;
+  background: rgba(18, 40, 28, 0.6) !important;
+  border: 1px solid rgba(13,138,69,0.22);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 html.tema-navidad .album-card:hover {
-  border-color: rgba(212,36,59,0.5);
-  box-shadow: 0 14px 36px rgba(13,138,69,0.3);
-  transform: translateY(-4px);
+  border-color: rgba(212,36,59,0.45);
+  box-shadow: 0 10px 28px rgba(13,138,69,0.22);
+  transform: translateY(-3px);
 }
-html.tema-navidad .card-play-btn, html.tema-navidad .btn-play-big {
+html.tema-navidad .card-play-btn,
+html.tema-navidad .btn-play-big {
   background: linear-gradient(135deg, #d4243b, #a01a2e) !important;
-  box-shadow: 0 6px 24px rgba(212,36,59,0.5) !important;
+  box-shadow: 0 4px 18px rgba(212,36,59,0.4) !important;
 }
 html.tema-navidad .player-bar {
   background: rgba(6, 12, 9, 0.96) !important;
-  border-top: 1px solid rgba(13,138,69,0.35) !important;
+  border-top: 1px solid rgba(13,138,69,0.3) !important;
 }
 html.tema-navidad .btn-play-bar {
   background: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
@@ -55,7 +56,7 @@ html.tema-navidad #volume-slider {
   background: linear-gradient(to right, #0d8a45 var(--volume-progress), #1a3024 var(--volume-progress)) !important;
 }
 html.tema-navidad #auth-screen {
-  background: radial-gradient(ellipse at 50% 20%, rgba(13,138,69,0.22), transparent 50%), #050a07 !important;
+  background: radial-gradient(ellipse at 50% 20%, rgba(13,138,69,0.2), transparent 50%), #050a07 !important;
 }
 html.tema-navidad .auth-btn { background: linear-gradient(135deg, #d4243b, #a01a2e) !important; }
 html.tema-navidad #loading-screen {
@@ -70,6 +71,7 @@ html.tema-navidad #auth-screen .w-10,
 html.tema-navidad #loading-screen .w-10 {
   background: linear-gradient(135deg, #d4243b, #0d8a45) !important;
 }
+
 .pp-logo-wrap { position: relative; display: inline-flex; align-items: center; gap: .75rem; cursor: pointer; user-select: none; }
 .pp-logo-icon { position: relative; overflow: visible !important; }
 
@@ -77,12 +79,12 @@ html.tema-navidad #loading-screen .w-10 {
   position: absolute; top: -18px; left: 50%;
   transform: translateX(-42%) rotate(-12deg);
   pointer-events: none; z-index: 6;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
-  animation: pp-hat-pop .6s cubic-bezier(.34,1.56,.64,1) both;
-  animation-delay: .5s; width: 36px; height: 28px;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.45));
+  animation: pp-hat-pop .55s cubic-bezier(.34,1.56,.64,1) both;
+  animation-delay: .4s; width: 34px; height: 26px;
 }
 @keyframes pp-hat-pop {
-  from { opacity: 0; transform: translateX(-42%) translateY(-16px) rotate(-30deg) scale(.3); }
+  from { opacity: 0; transform: translateX(-42%) translateY(-14px) rotate(-28deg) scale(.35); }
   to   { opacity: 1; transform: translateX(-42%) rotate(-12deg) scale(1); }
 }
 
@@ -92,152 +94,162 @@ html.tema-navidad #loading-screen .w-10 {
   pointer-events: none; z-index: 43;
 }
 .pp-light-strip {
-  position: absolute; left: 8px; right: 8px; height: 16px;
+  position: absolute; left: 6px; right: 6px; height: 14px;
   pointer-events: none; overflow: visible;
 }
-.pp-light-strip.top { top: 4px; }
-.pp-light-strip.bottom { bottom: 4px; }
-.pp-light-strip svg { width: 100%; height: 16px; display: block; }
+.pp-light-strip.top { top: 3px; }
+.pp-light-strip.bottom { bottom: 3px; }
+.pp-light-strip svg { width: 100%; height: 14px; display: block; }
+
 .pp-fx-screen {
   position: fixed; inset: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 42;
+  contain: strict;
 }
 .pp-particle-nieve {
-  position: absolute; top: -16px; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.65));
-  animation: pp-fall-snow linear forwards;
+  position: absolute; top: -12px; border-radius: 50%;
+  background: #fff;
+  opacity: 0.85;
   will-change: transform;
+  animation: pp-fall-snow linear forwards;
 }
 @keyframes pp-fall-snow {
-  0% { transform: translate3d(0,0,0); opacity: 0; }
-  8% { opacity: 1; }
-  100% { transform: translate3d(var(--drift,28px), 110vh, 0); opacity: .12; }
+  0%   { transform: translate3d(0,0,0); opacity: 0; }
+  10%  { opacity: 0.9; }
+  100% { transform: translate3d(var(--drift, 20px), 110vh, 0); opacity: 0.15; }
 }
 
-/* Árbol elevado por encima de la barra de volumen (bottom: 100px) */
+/* Árbol elevado */
 .pp-xmas-tree {
   position: fixed;
-  right: 24px;
+  right: 22px;
   bottom: 100px;
   z-index: 35;
   cursor: pointer;
   pointer-events: auto !important;
-  filter: drop-shadow(0 14px 32px rgba(0,0,0,0.8));
+  filter: drop-shadow(0 10px 22px rgba(0,0,0,0.65));
   transition: transform 0.2s ease;
-  animation: pp-tree-in 0.9s cubic-bezier(.34,1.4,.64,1) both;
+  animation: pp-tree-in 0.8s cubic-bezier(.34,1.4,.64,1) both;
+  contain: layout style;
 }
-.pp-xmas-tree:hover { transform: scale(1.02); }
+.pp-xmas-tree:hover { transform: scale(1.025); }
 
 @keyframes pp-tree-in {
-  from { opacity: 0; transform: translateY(30px) scale(.8); }
-  to { opacity: 1; transform: none; }
+  from { opacity: 0; transform: translateY(24px) scale(.85); }
+  to   { opacity: 1; transform: none; }
 }
 .pp-xmas-tree .star-glow {
-  animation: pp-star-pulse 1.8s ease-in-out infinite;
+  animation: pp-star-pulse 2s ease-in-out infinite;
   transform-origin: center;
 }
 @keyframes pp-star-pulse {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.35); filter: drop-shadow(0 0 14px #f5c542); }
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.28); }
 }
 
-/* --- CONTADORES SUPERIORES GRANDES Y ALTAMENTE TEMATIZADOS --- */
+/* Contadores */
 .pp-top-counters-bar {
   position: fixed;
-  top: 16px;
-  right: 24px;
+  top: 14px;
+  right: 20px;
   z-index: 45;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   pointer-events: auto;
 }
 .pp-top-counter-box {
-  background: linear-gradient(135deg, rgba(6, 40, 22, 0.95), rgba(4, 20, 11, 0.95));
-  border: 2px solid rgba(212, 36, 59, 0.6);
-  border-radius: 14px;
-  padding: 10px 18px;
+  background: linear-gradient(135deg, rgba(6, 40, 22, 0.94), rgba(4, 20, 11, 0.94));
+  border: 2px solid rgba(212, 36, 59, 0.55);
+  border-radius: 12px;
+  padding: 8px 14px;
   text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(212, 36, 59, 0.25), inset 0 0 12px rgba(13, 138, 69, 0.3);
-  min-width: 200px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(212, 36, 59, 0.2);
+  min-width: 180px;
+  transition: transform 0.2s ease;
 }
-.pp-top-counter-box:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(212, 36, 59, 0.4);
-}
+.pp-top-counter-box:hover { transform: translateY(-2px); }
 .pp-top-counter-box.newyear {
-  background: linear-gradient(135deg, rgba(20, 18, 35, 0.95), rgba(8, 8, 16, 0.95));
-  border: 2px solid rgba(245, 197, 66, 0.7);
-  box-shadow: 0 8px 24px rgba(245, 197, 66, 0.25), inset 0 0 12px rgba(245, 197, 66, 0.2);
-}
-.pp-top-counter-box.newyear:hover {
-  box-shadow: 0 10px 30px rgba(245, 197, 66, 0.45);
+  background: linear-gradient(135deg, rgba(20, 18, 35, 0.94), rgba(8, 8, 16, 0.94));
+  border-color: rgba(245, 197, 66, 0.65);
+  box-shadow: 0 6px 18px rgba(245, 197, 66, 0.2);
 }
 .pp-top-counter-title {
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .1em;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
   color: #fca5a5;
   text-transform: uppercase;
-  margin-bottom: 4px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  margin-bottom: 3px;
 }
-.pp-top-counter-box.newyear .pp-top-counter-title {
-  color: #fde047;
-}
+.pp-top-counter-box.newyear .pp-top-counter-title { color: #fde047; }
 .pp-top-counter-time {
-  font-size: 16px;
-  font-weight: 800;
-  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
   font-family: monospace;
-  letter-spacing: .03em;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  letter-spacing: .02em;
 }
 
-/* Modos de iluminación del árbol */
-.pp-xmas-tree.modo-1 .bulb-dynamic { animation: colorCycle 4s infinite linear; }
-.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.4s infinite alternate; }
-.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; filter: drop-shadow(0 0 8px #ffffff); fill: #ffffff; }
-.pp-xmas-tree.modo-4 .bulb-dynamic { animation: partyDisco 0.8s infinite steps(1); }
-.pp-xmas-tree.modo-5 .bulb-dynamic { animation: waveGlow 2s infinite ease-in-out; }
+/* Modos de luces del árbol (más ligeros) */
+.pp-xmas-tree.modo-1 .bulb-dynamic { animation: colorCycle 5s infinite linear; }
+.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.55s infinite alternate; }
+.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; fill: #fff; }
+.pp-xmas-tree.modo-4 .bulb-dynamic { animation: partyDisco 1.1s infinite steps(1); }
+.pp-xmas-tree.modo-5 .bulb-dynamic { animation: waveGlow 2.4s infinite ease-in-out; }
 
 @keyframes colorCycle {
-  0% { fill: #d4243b; filter: drop-shadow(0 0 5px #d4243b); }
-  33% { fill: #f5c542; filter: drop-shadow(0 0 5px #f5c542); }
-  66% { fill: #38bdf8; filter: drop-shadow(0 0 5px #38bdf8); }
-  100% { fill: #22c55e; filter: drop-shadow(0 0 5px #22c55e); }
+  0%   { fill: #d4243b; }
+  33%  { fill: #f5c542; }
+  66%  { fill: #38bdf8; }
+  100% { fill: #22c55e; }
 }
 @keyframes lightBlinkFast {
-  0% { opacity: 0.2; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.35); filter: drop-shadow(0 0 10px #f5c542); }
+  0%   { opacity: 0.25; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.25); }
 }
 @keyframes partyDisco {
-  0% { fill: #ef4444; filter: drop-shadow(0 0 6px #ef4444); }
-  25% { fill: #3b82f6; filter: drop-shadow(0 0 6px #3b82f6); }
-  50% { fill: #eab308; filter: drop-shadow(0 0 6px #eab308); }
-  75% { fill: #ec4899; filter: drop-shadow(0 0 6px #ec4899); }
-  100% { fill: #22c55e; filter: drop-shadow(0 0 6px #22c55e); }
+  0%   { fill: #ef4444; }
+  25%  { fill: #3b82f6; }
+  50%  { fill: #eab308; }
+  75%  { fill: #ec4899; }
+  100% { fill: #22c55e; }
 }
 @keyframes waveGlow {
-  0%, 100% { opacity: 0.3; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.25); filter: drop-shadow(0 0 10px #38bdf8); }
+  0%, 100% { opacity: 0.35; transform: scale(0.92); }
+  50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* Respetar preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .pp-particle-nieve,
+  .pp-xmas-tree .bulb-dynamic,
+  .pp-xmas-tree .star-glow,
+  .pp-seasonal-hat {
+    animation: none !important;
+  }
+  .pp-fx-screen { display: none !important; }
 }
 </style>
+
 <script>
 (function () {
   var ID = "navidad";
   var COLORS = ["#d4243b", "#0d8a45", "#f5c542", "#ffffff"];
   var HAT =
-    '<svg viewBox="0 0 72 52" width="36" height="28" xmlns="http://www.w3.org/2000/svg">' +
+    '<svg viewBox="0 0 72 52" width="34" height="26" xmlns="http://www.w3.org/2000/svg">' +
     '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#b91c1c"/>' +
     '<path d="M8 36 C14 22 30 10 44 10 C56 10 64 22 66 34" fill="#d4243b"/>' +
     '<ellipse cx="38" cy="38" rx="30" ry="7" fill="#f8fafc"/>' +
     '<circle cx="62" cy="12" r="7" fill="#f8fafc"/></svg>';
 
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var MAX_SNOW = reducedMotion ? 0 : 32;          // antes 60
+  var SNOW_INTERVAL = reducedMotion ? 99999 : 420; // antes 250ms
+
   function runNavidadTheme() {
     function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
-    
+
     function markLogos() {
       $("aside.sidebar > div.flex.items-center.gap-3, #auth-screen .auth-card > div.flex.items-center, #loading-screen > div.flex.items-center").forEach(function (el) {
         if (!el.classList.contains("pp-logo-wrap")) {
@@ -270,16 +282,16 @@ html.tema-navidad #loading-screen .w-10 {
     }
 
     function makeStripSVG(colors, count) {
-      count = count || 22;
-      var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 16">'];
-      parts.push('<path d="M0 9 Q 125 5 250 9 T 500 9 T 750 9 T 1000 9" fill="none" stroke="rgba(200,200,200,0.4)" stroke-width="1.3"/>');
+      count = count || 16;
+      var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 14">'];
+      parts.push('<path d="M0 8 Q 125 4 250 8 T 500 8 T 750 8 T 1000 8" fill="none" stroke="rgba(200,200,200,0.35)" stroke-width="1.2"/>');
       for (var i = 0; i < count; i++) {
-        var x = 18 + (i / (count - 1)) * 964;
-        var y = 9 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.2;
+        var x = 20 + (i / (count - 1)) * 960;
+        var y = 8 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.1;
         var c = colors[i % colors.length];
-        var delay = (i * 0.1).toFixed(2);
-        parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.4" fill="'+c+'">');
-        parts.push('<animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="'+delay+'s" repeatCount="indefinite"/>');
+        var delay = (i * 0.12).toFixed(2);
+        parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.1" fill="'+c+'">');
+        parts.push('<animate attributeName="opacity" values="0.35;1;0.35" dur="1.8s" begin="'+delay+'s" repeatCount="indefinite"/>');
         parts.push('</circle>');
       }
       parts.push('</svg>');
@@ -297,11 +309,11 @@ html.tema-navidad #loading-screen .w-10 {
       ov.innerHTML = "";
       var top = document.createElement("div");
       top.className = "pp-light-strip top";
-      top.innerHTML = makeStripSVG(COLORS, 24);
+      top.innerHTML = makeStripSVG(COLORS, 16);
       ov.appendChild(top);
       var bot = document.createElement("div");
       bot.className = "pp-light-strip bottom";
-      bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 22);
+      bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 14);
       ov.appendChild(bot);
     }
 
@@ -327,9 +339,9 @@ html.tema-navidad #loading-screen .w-10 {
       var el = document.createElement("div");
       el.className = "pp-xmas-tree modo-1";
       el.setAttribute("title", "¡Haz clic en el árbol para cambiar sus luces!");
-      
+
       el.innerHTML =
-        '<svg width="145" height="195" viewBox="0 0 145 195" xmlns="http://www.w3.org/2000/svg">' +
+        '<svg width="140" height="190" viewBox="0 0 145 195" xmlns="http://www.w3.org/2000/svg">' +
         '<defs>' +
           '<linearGradient id="treeGradBig" x1="0%" y1="0%" x2="100%" y2="100%">' +
             '<stop offset="0%" stop-color="#34d399"/>' +
@@ -341,40 +353,36 @@ html.tema-navidad #loading-screen .w-10 {
           '<linearGradient id="giftGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fde047"/><stop offset="100%" stop-color="#ca8a04"/></linearGradient>' +
           '<linearGradient id="giftPurple" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#7e22ce"/></linearGradient>' +
         '</defs>' +
-
-        '<path d="M72 8 Q88 38 103 52 Q115 60 105 70 Q122 90 112 102 Q128 125 115 140 Q135 165 122 175 L22 175 Q9 165 28 140 Q16 125 32 102 Q22 90 39 70 Q29 60 41 52 Q56 38 72 8 Z" fill="url(#treeGradBig)" stroke="#064e21" stroke-width="1.8"/>' +
-        '<rect x="61" y="175" width="22" height="16" rx="3" fill="#451a03"/>' +
-        
-        '<ellipse cx="72" cy="191" rx="42" ry="3" fill="rgba(0,0,0,0.55)"/>' +
-        '<rect x="24" y="182" width="20" height="11" rx="2" fill="url(#giftPurple)"/>' +
-        '<rect x="32" y="182" width="4" height="11" fill="#f8fafc"/>' +
-        '<rect x="54" y="174" width="30" height="19" rx="2.5" fill="url(#giftBlue)"/>' +
-        '<rect x="67" y="174" width="5" height="19" fill="#e2e8f0"/>' +
-        '<rect x="54" y="183" width="30" height="4" fill="#e2e8f0"/>' +
-        '<path d="M63 174 C59 168 67 168 69 174 Z" fill="#cbd5e1"/>' +
-        '<path d="M72 174 C76 168 70 168 69 174 Z" fill="#cbd5e1"/>' +
-        '<circle cx="69" cy="174" r="2" fill="#ffffff"/>' +
-        '<rect x="86" y="177" width="25" height="16" rx="2" fill="url(#giftGold)"/>' +
-        '<rect x="97" y="177" width="4.5" height="16" fill="#ef4444"/>' +
-        '<rect x="86" y="184" width="25" height="3.5" fill="#ef4444"/>' +
-        '<rect x="42" y="179" width="24" height="14" rx="2" fill="url(#giftRed)"/>' +
-        '<rect x="52" y="179" width="4" height="14" fill="#fde047"/>' +
-        '<rect x="42" y="185" width="24" height="3" fill="#fde047"/>' +
-        '<rect x="45" y="170" width="16" height="10" rx="1.5" fill="url(#giftGold)"/>' +
-        '<rect x="51" y="170" width="3" height="10" fill="#dc2626"/>' +
-
+        '<path d="M72 8 Q88 38 103 52 Q115 60 105 70 Q122 90 112 102 Q128 125 115 140 Q135 165 122 175 L22 175 Q9 165 28 140 Q16 125 32 102 Q22 90 39 70 Q29 60 41 52 Q56 38 72 8 Z" fill="url(#treeGradBig)" stroke="#064e21" stroke-width="1.6"/>' +
+        '<rect x="61" y="175" width="22" height="15" rx="3" fill="#451a03"/>' +
+        '<ellipse cx="72" cy="190" rx="40" ry="2.8" fill="rgba(0,0,0,0.5)"/>' +
+        '<rect x="24" y="181" width="19" height="10" rx="2" fill="url(#giftPurple)"/>' +
+        '<rect x="31" y="181" width="3.5" height="10" fill="#f8fafc"/>' +
+        '<rect x="54" y="173" width="28" height="18" rx="2.5" fill="url(#giftBlue)"/>' +
+        '<rect x="66" y="173" width="4.5" height="18" fill="#e2e8f0"/>' +
+        '<rect x="54" y="182" width="28" height="3.5" fill="#e2e8f0"/>' +
+        '<path d="M62 173 C58 167 66 167 68 173 Z" fill="#cbd5e1"/>' +
+        '<path d="M71 173 C75 167 69 167 68 173 Z" fill="#cbd5e1"/>' +
+        '<circle cx="68" cy="173" r="1.8" fill="#ffffff"/>' +
+        '<rect x="85" y="176" width="24" height="15" rx="2" fill="url(#giftGold)"/>' +
+        '<rect x="95" y="176" width="4" height="15" fill="#ef4444"/>' +
+        '<rect x="85" y="183" width="24" height="3" fill="#ef4444"/>' +
+        '<rect x="42" y="178" width="22" height="13" rx="2" fill="url(#giftRed)"/>' +
+        '<rect x="51" y="178" width="3.5" height="13" fill="#fde047"/>' +
+        '<rect x="42" y="184" width="22" height="2.8" fill="#fde047"/>' +
+        '<rect x="45" y="169" width="15" height="9" rx="1.5" fill="url(#giftGold)"/>' +
+        '<rect x="50" y="169" width="3" height="9" fill="#dc2626"/>' +
         '<polygon class="star-glow" points="72,0 74,5 80,6 75,11 77,17 72,13 67,17 69,11 64,6 70,5" fill="#f5c542"/>' +
-        
-        '<circle class="bulb-dynamic" cx="72" cy="32" r="5" fill="#d4243b"/>' +
-        '<circle class="bulb-dynamic" cx="56" cy="58" r="5" fill="#f5c542"/>' +
-        '<circle class="bulb-dynamic" cx="88" cy="65" r="5" fill="#38bdf8"/>' +
-        '<circle class="bulb-dynamic" cx="42" cy="92" r="5" fill="#22c55e"/>' +
-        '<circle class="bulb-dynamic" cx="72" cy="98" r="5" fill="#d4243b"/>' +
-        '<circle class="bulb-dynamic" cx="100" cy="90" r="5" fill="#f5c542"/>' +
-        '<circle class="bulb-dynamic" cx="32" cy="130" r="5" fill="#38bdf8"/>' +
-        '<circle class="bulb-dynamic" cx="58" cy="138" r="5" fill="#22c55e"/>' +
-        '<circle class="bulb-dynamic" cx="84" cy="132" r="5" fill="#d4243b"/>' +
-        '<circle class="bulb-dynamic" cx="110" cy="142" r="5" fill="#f5c542"/>' +
+        '<circle class="bulb-dynamic" cx="72" cy="32" r="4.6" fill="#d4243b"/>' +
+        '<circle class="bulb-dynamic" cx="56" cy="58" r="4.6" fill="#f5c542"/>' +
+        '<circle class="bulb-dynamic" cx="88" cy="65" r="4.6" fill="#38bdf8"/>' +
+        '<circle class="bulb-dynamic" cx="42" cy="92" r="4.6" fill="#22c55e"/>' +
+        '<circle class="bulb-dynamic" cx="72" cy="98" r="4.6" fill="#d4243b"/>' +
+        '<circle class="bulb-dynamic" cx="100" cy="90" r="4.6" fill="#f5c542"/>' +
+        '<circle class="bulb-dynamic" cx="32" cy="130" r="4.6" fill="#38bdf8"/>' +
+        '<circle class="bulb-dynamic" cx="58" cy="138" r="4.6" fill="#22c55e"/>' +
+        '<circle class="bulb-dynamic" cx="84" cy="132" r="4.6" fill="#d4243b"/>' +
+        '<circle class="bulb-dynamic" cx="110" cy="142" r="4.6" fill="#f5c542"/>' +
         '</svg>';
 
       var modoActual = 1;
@@ -393,9 +401,7 @@ html.tema-navidad #loading-screen .w-10 {
         var anioActual = ahora.getFullYear();
 
         var navidad = new Date(anioActual, 11, 25, 0, 0, 0);
-        if (ahora > navidad) {
-          navidad = new Date(anioActual + 1, 11, 25, 0, 0, 0);
-        }
+        if (ahora > navidad) navidad = new Date(anioActual + 1, 11, 25, 0, 0, 0);
         var diffNavidad = navidad - ahora;
 
         var anoNuevo = new Date(anioActual + 1, 0, 1, 0, 0, 0);
@@ -403,16 +409,15 @@ html.tema-navidad #loading-screen .w-10 {
 
         function formatearTiempo(ms) {
           if (ms <= 0) return "¡Llegó!";
-          var d = Math.floor(ms / (1000 * 60 * 60 * 24));
-          var h = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var m = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
-          var s = Math.floor((ms % (1000 * 60)) / 1000);
+          var d = Math.floor(ms / 86400000);
+          var h = Math.floor((ms % 86400000) / 3600000);
+          var m = Math.floor((ms % 3600000) / 60000);
+          var s = Math.floor((ms % 60000) / 1000);
           return d + "d " + h + "h " + m + "m " + s + "s";
         }
 
         var elXmas = document.getElementById("pp-timer-xmas");
         var elNewYear = document.getElementById("pp-timer-newyear");
-
         if (elXmas) elXmas.textContent = formatearTiempo(diffNavidad);
         if (elNewYear) elNewYear.textContent = formatearTiempo(diffAnioNuevo);
       }
@@ -423,31 +428,44 @@ html.tema-navidad #loading-screen .w-10 {
     }
 
     function snow() {
+      if (MAX_SNOW === 0) return;
+
       var layer = document.querySelector(".pp-fx-screen");
       if (!layer) {
         layer = document.createElement("div");
         layer.className = "pp-fx-screen";
         document.body.appendChild(layer);
       }
+
       function flake() {
         if (document.hidden) return;
-        if (layer.querySelectorAll(".pp-particle-nieve").length > 60) return;
+        var current = layer.children.length;
+        if (current >= MAX_SNOW) return;
+
         var p = document.createElement("span");
         p.className = "pp-particle-nieve";
-        var size = 2 + Math.random() * 6;
+        var size = 2 + Math.random() * 4.5;
         p.style.left = Math.random() * 100 + "%";
         p.style.width = size + "px";
         p.style.height = size + "px";
-        p.style.setProperty("--drift", (Math.random() * 70 - 25) + "px");
-        p.style.animationDuration = (6 + Math.random() * 10) + "s";
+        p.style.setProperty("--drift", (Math.random() * 50 - 18) + "px");
+        p.style.animationDuration = (7 + Math.random() * 9) + "s";
         layer.appendChild(p);
-        setTimeout(function () { p.remove(); }, 16000);
+
+        // Limpieza más agresiva
+        setTimeout(function () {
+          if (p.parentNode) p.remove();
+        }, 16000);
       }
-      for (var i = 0; i < 20; i++) flake();
+
+      // Arranque suave
+      for (var i = 0; i < 10; i++) setTimeout(flake, i * 80);
+
       if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
-      window.__ppSnowTimer = setInterval(flake, 250);
+      window.__ppSnowTimer = setInterval(flake, SNOW_INTERVAL);
     }
 
+    // Ejecución inicial
     markLogos();
     putHats();
     placeLights();
@@ -455,19 +473,30 @@ html.tema-navidad #loading-screen .w-10 {
     placeTree();
     snow();
 
+    // Observer throttled (mucho más liviano)
     if (!window.__ppNavidadObserver) {
+      var scheduled = false;
       window.__ppNavidadObserver = new MutationObserver(function () {
-        markLogos();
-        putHats();
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(function () {
+          markLogos();
+          putHats();
+          scheduled = false;
+        });
       });
-      window.__ppNavidadObserver.observe(document.body, { childList: true, subtree: true });
+      window.__ppNavidadObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
     }
   }
 
+  // Solo dos ejecuciones (suficiente)
   runNavidadTheme();
-  setTimeout(runNavidadTheme, 300);
-  setTimeout(runNavidadTheme, 800);
+  setTimeout(runNavidadTheme, 600);
 
+  // Cleanup
   window.__ppTemaCleanup = window.__ppTemaCleanup || {};
   window.__ppTemaCleanup[ID] = function () {
     if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
@@ -476,7 +505,9 @@ html.tema-navidad #loading-screen .w-10 {
       try { window.__ppNavidadObserver.disconnect(); } catch (e) {}
       window.__ppNavidadObserver = null;
     }
-    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree, .pp-top-counters-bar").forEach(function (e) { e.remove(); });
+    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree, .pp-top-counters-bar").forEach(function (e) {
+      e.remove();
+    });
   };
 })();
 </script>
