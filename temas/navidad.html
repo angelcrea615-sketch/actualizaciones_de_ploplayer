@@ -1,4 +1,4 @@
-<!-- Navidad optimizada: pro visual + bajo consumo -->
+<!-- Navidad optimizada v2: luces independientes + nieve Canvas -->
 <style id="pp-tema-style-navidad">
 html.tema-navidad {
   --accent: #d4243b;
@@ -94,32 +94,24 @@ html.tema-navidad #loading-screen .w-10 {
   pointer-events: none; z-index: 43;
 }
 .pp-light-strip {
-  position: absolute; left: 6px; right: 6px; height: 14px;
+  position: absolute; left: 6px; right: 6px; height: 16px;
   pointer-events: none; overflow: visible;
 }
 .pp-light-strip.top { top: 3px; }
 .pp-light-strip.bottom { bottom: 3px; }
-.pp-light-strip svg { width: 100%; height: 14px; display: block; }
+.pp-light-strip svg { width: 100%; height: 16px; display: block; }
 
-.pp-fx-screen {
-  position: fixed; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 42;
-  contain: strict;
-}
-.pp-particle-nieve {
-  position: absolute; top: -12px; border-radius: 50%;
-  background: #fff;
-  opacity: 0.85;
-  will-change: transform;
-  animation: pp-fall-snow linear forwards;
-}
-@keyframes pp-fall-snow {
-  0%   { transform: translate3d(0,0,0); opacity: 0; }
-  10%  { opacity: 0.9; }
-  100% { transform: translate3d(var(--drift, 20px), 110vh, 0); opacity: 0.15; }
+/* Canvas de nieve (un solo elemento) */
+.pp-snow-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 42;
 }
 
-/* Árbol elevado */
+/* Árbol */
 .pp-xmas-tree {
   position: fixed;
   right: 22px;
@@ -191,51 +183,63 @@ html.tema-navidad #loading-screen .w-10 {
   letter-spacing: .02em;
 }
 
-/* Modos de luces del árbol (más ligeros) */
-.pp-xmas-tree.modo-1 .bulb-dynamic { animation: colorCycle 5s infinite linear; }
-.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.55s infinite alternate; }
-.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; fill: #fff; }
-.pp-xmas-tree.modo-4 .bulb-dynamic { animation: partyDisco 1.1s infinite steps(1); }
-.pp-xmas-tree.modo-5 .bulb-dynamic { animation: waveGlow 2.4s infinite ease-in-out; }
+/* Modos del árbol - cada bombilla tiene color independiente */
+.pp-xmas-tree.modo-1 .bulb-dynamic { animation: colorCycle 4.5s infinite linear; }
+.pp-xmas-tree.modo-2 .bulb-dynamic { animation: lightBlinkFast 0.5s infinite alternate; }
+.pp-xmas-tree.modo-3 .bulb-dynamic { animation: none; opacity: 1; fill: #ffffff; filter: drop-shadow(0 0 6px #fff); }
+.pp-xmas-tree.modo-4 .bulb-dynamic { animation: partyDisco 0.9s infinite steps(1); }
+.pp-xmas-tree.modo-5 .bulb-dynamic { animation: waveGlow 2.2s infinite ease-in-out; }
+
+/* Cada bombilla empieza en un color distinto gracias a animation-delay */
+.pp-xmas-tree .bulb-dynamic:nth-child(1)  { animation-delay: 0.0s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(2)  { animation-delay: 0.3s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(3)  { animation-delay: 0.6s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(4)  { animation-delay: 0.9s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(5)  { animation-delay: 1.2s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(6)  { animation-delay: 1.5s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(7)  { animation-delay: 0.2s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(8)  { animation-delay: 0.5s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(9)  { animation-delay: 0.8s; }
+.pp-xmas-tree .bulb-dynamic:nth-child(10) { animation-delay: 1.1s; }
 
 @keyframes colorCycle {
   0%   { fill: #d4243b; }
-  33%  { fill: #f5c542; }
-  66%  { fill: #38bdf8; }
-  100% { fill: #22c55e; }
+  25%  { fill: #f5c542; }
+  50%  { fill: #38bdf8; }
+  75%  { fill: #22c55e; }
+  100% { fill: #d4243b; }
 }
 @keyframes lightBlinkFast {
-  0%   { opacity: 0.25; transform: scale(0.85); }
-  100% { opacity: 1; transform: scale(1.25); }
+  0%   { opacity: 0.2; transform: scale(0.8); }
+  100% { opacity: 1;   transform: scale(1.3); }
 }
 @keyframes partyDisco {
   0%   { fill: #ef4444; }
-  25%  { fill: #3b82f6; }
-  50%  { fill: #eab308; }
-  75%  { fill: #ec4899; }
-  100% { fill: #22c55e; }
+  20%  { fill: #3b82f6; }
+  40%  { fill: #eab308; }
+  60%  { fill: #ec4899; }
+  80%  { fill: #22c55e; }
+  100% { fill: #ef4444; }
 }
 @keyframes waveGlow {
-  0%, 100% { opacity: 0.35; transform: scale(0.92); }
-  50%      { opacity: 1; transform: scale(1.2); }
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50%      { opacity: 1;   transform: scale(1.25); }
 }
 
-/* Respetar preferencia de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
-  .pp-particle-nieve,
   .pp-xmas-tree .bulb-dynamic,
   .pp-xmas-tree .star-glow,
   .pp-seasonal-hat {
     animation: none !important;
   }
-  .pp-fx-screen { display: none !important; }
+  .pp-snow-canvas { display: none !important; }
 }
 </style>
 
 <script>
 (function () {
   var ID = "navidad";
-  var COLORS = ["#d4243b", "#0d8a45", "#f5c542", "#ffffff"];
+  var COLORS = ["#d4243b", "#0d8a45", "#f5c542", "#ffffff", "#38bdf8", "#ec4899"];
   var HAT =
     '<svg viewBox="0 0 72 52" width="34" height="26" xmlns="http://www.w3.org/2000/svg">' +
     '<path d="M10 38 C10 18 28 4 42 4 C58 4 66 20 66 34" fill="#b91c1c"/>' +
@@ -244,8 +248,6 @@ html.tema-navidad #loading-screen .w-10 {
     '<circle cx="62" cy="12" r="7" fill="#f8fafc"/></svg>';
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var MAX_SNOW = reducedMotion ? 0 : 32;          // antes 60
-  var SNOW_INTERVAL = reducedMotion ? 99999 : 420; // antes 250ms
 
   function runNavidadTheme() {
     function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
@@ -281,17 +283,23 @@ html.tema-navidad #loading-screen .w-10 {
       return Math.ceil(side.getBoundingClientRect().width) || 220;
     }
 
+    // Luces con color independiente por bombilla
     function makeStripSVG(colors, count) {
-      count = count || 16;
-      var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 14">'];
-      parts.push('<path d="M0 8 Q 125 4 250 8 T 500 8 T 750 8 T 1000 8" fill="none" stroke="rgba(200,200,200,0.35)" stroke-width="1.2"/>');
+      count = count || 18;
+      var parts = ['<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1000 16">'];
+      parts.push('<path d="M0 9 Q 125 5 250 9 T 500 9 T 750 9 T 1000 9" fill="none" stroke="rgba(200,200,200,0.35)" stroke-width="1.2"/>');
+      
       for (var i = 0; i < count; i++) {
-        var x = 20 + (i / (count - 1)) * 960;
-        var y = 8 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.1;
+        var x = 18 + (i / (count - 1)) * 964;
+        var y = 9 + Math.sin((i / (count - 1)) * Math.PI * 2) * 1.3;
         var c = colors[i % colors.length];
-        var delay = (i * 0.12).toFixed(2);
-        parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.1" fill="'+c+'">');
-        parts.push('<animate attributeName="opacity" values="0.35;1;0.35" dur="1.8s" begin="'+delay+'s" repeatCount="indefinite"/>');
+        var delay = (i * 0.15).toFixed(2);
+        var dur = (1.4 + (i % 4) * 0.25).toFixed(2); // duración ligeramente diferente
+        
+        parts.push('<circle cx="'+x+'" cy="'+y+'" r="3.3" fill="'+c+'">');
+        parts.push('<animate attributeName="opacity" values="0.3;1;0.3" dur="'+dur+'s" begin="'+delay+'s" repeatCount="indefinite"/>');
+        // ligero cambio de color independiente
+        parts.push('<animate attributeName="fill" values="'+c+';'+colors[(i+2)%colors.length]+';'+c+'" dur="'+(3+i%3)+'s" begin="'+delay+'s" repeatCount="indefinite"/>');
         parts.push('</circle>');
       }
       parts.push('</svg>');
@@ -307,13 +315,15 @@ html.tema-navidad #loading-screen .w-10 {
         document.body.appendChild(ov);
       }
       ov.innerHTML = "";
+      
       var top = document.createElement("div");
       top.className = "pp-light-strip top";
-      top.innerHTML = makeStripSVG(COLORS, 16);
+      top.innerHTML = makeStripSVG(COLORS, 18);
       ov.appendChild(top);
+      
       var bot = document.createElement("div");
       bot.className = "pp-light-strip bottom";
-      bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 14);
+      bot.innerHTML = makeStripSVG(COLORS.slice().reverse(), 16);
       ov.appendChild(bot);
     }
 
@@ -344,9 +354,7 @@ html.tema-navidad #loading-screen .w-10 {
         '<svg width="140" height="190" viewBox="0 0 145 195" xmlns="http://www.w3.org/2000/svg">' +
         '<defs>' +
           '<linearGradient id="treeGradBig" x1="0%" y1="0%" x2="100%" y2="100%">' +
-            '<stop offset="0%" stop-color="#34d399"/>' +
-            '<stop offset="45%" stop-color="#059669"/>' +
-            '<stop offset="100%" stop-color="#064e21"/>' +
+            '<stop offset="0%" stop-color="#34d399"/><stop offset="45%" stop-color="#059669"/><stop offset="100%" stop-color="#064e21"/>' +
           '</linearGradient>' +
           '<linearGradient id="giftRed" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f87171"/><stop offset="100%" stop-color="#b91c1c"/></linearGradient>' +
           '<linearGradient id="giftBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>' +
@@ -356,33 +364,26 @@ html.tema-navidad #loading-screen .w-10 {
         '<path d="M72 8 Q88 38 103 52 Q115 60 105 70 Q122 90 112 102 Q128 125 115 140 Q135 165 122 175 L22 175 Q9 165 28 140 Q16 125 32 102 Q22 90 39 70 Q29 60 41 52 Q56 38 72 8 Z" fill="url(#treeGradBig)" stroke="#064e21" stroke-width="1.6"/>' +
         '<rect x="61" y="175" width="22" height="15" rx="3" fill="#451a03"/>' +
         '<ellipse cx="72" cy="190" rx="40" ry="2.8" fill="rgba(0,0,0,0.5)"/>' +
-        '<rect x="24" y="181" width="19" height="10" rx="2" fill="url(#giftPurple)"/>' +
-        '<rect x="31" y="181" width="3.5" height="10" fill="#f8fafc"/>' +
-        '<rect x="54" y="173" width="28" height="18" rx="2.5" fill="url(#giftBlue)"/>' +
-        '<rect x="66" y="173" width="4.5" height="18" fill="#e2e8f0"/>' +
-        '<rect x="54" y="182" width="28" height="3.5" fill="#e2e8f0"/>' +
-        '<path d="M62 173 C58 167 66 167 68 173 Z" fill="#cbd5e1"/>' +
-        '<path d="M71 173 C75 167 69 167 68 173 Z" fill="#cbd5e1"/>' +
-        '<circle cx="68" cy="173" r="1.8" fill="#ffffff"/>' +
-        '<rect x="85" y="176" width="24" height="15" rx="2" fill="url(#giftGold)"/>' +
-        '<rect x="95" y="176" width="4" height="15" fill="#ef4444"/>' +
-        '<rect x="85" y="183" width="24" height="3" fill="#ef4444"/>' +
-        '<rect x="42" y="178" width="22" height="13" rx="2" fill="url(#giftRed)"/>' +
-        '<rect x="51" y="178" width="3.5" height="13" fill="#fde047"/>' +
-        '<rect x="42" y="184" width="22" height="2.8" fill="#fde047"/>' +
-        '<rect x="45" y="169" width="15" height="9" rx="1.5" fill="url(#giftGold)"/>' +
-        '<rect x="50" y="169" width="3" height="9" fill="#dc2626"/>' +
+        // regalos
+        '<rect x="24" y="181" width="19" height="10" rx="2" fill="url(#giftPurple)"/><rect x="31" y="181" width="3.5" height="10" fill="#f8fafc"/>' +
+        '<rect x="54" y="173" width="28" height="18" rx="2.5" fill="url(#giftBlue)"/><rect x="66" y="173" width="4.5" height="18" fill="#e2e8f0"/><rect x="54" y="182" width="28" height="3.5" fill="#e2e8f0"/>' +
+        '<path d="M62 173 C58 167 66 167 68 173 Z" fill="#cbd5e1"/><path d="M71 173 C75 167 69 167 68 173 Z" fill="#cbd5e1"/><circle cx="68" cy="173" r="1.8" fill="#fff"/>' +
+        '<rect x="85" y="176" width="24" height="15" rx="2" fill="url(#giftGold)"/><rect x="95" y="176" width="4" height="15" fill="#ef4444"/><rect x="85" y="183" width="24" height="3" fill="#ef4444"/>' +
+        '<rect x="42" y="178" width="22" height="13" rx="2" fill="url(#giftRed)"/><rect x="51" y="178" width="3.5" height="13" fill="#fde047"/><rect x="42" y="184" width="22" height="2.8" fill="#fde047"/>' +
+        '<rect x="45" y="169" width="15" height="9" rx="1.5" fill="url(#giftGold)"/><rect x="50" y="169" width="3" height="9" fill="#dc2626"/>' +
+        // estrella
         '<polygon class="star-glow" points="72,0 74,5 80,6 75,11 77,17 72,13 67,17 69,11 64,6 70,5" fill="#f5c542"/>' +
-        '<circle class="bulb-dynamic" cx="72" cy="32" r="4.6" fill="#d4243b"/>' +
-        '<circle class="bulb-dynamic" cx="56" cy="58" r="4.6" fill="#f5c542"/>' +
-        '<circle class="bulb-dynamic" cx="88" cy="65" r="4.6" fill="#38bdf8"/>' +
-        '<circle class="bulb-dynamic" cx="42" cy="92" r="4.6" fill="#22c55e"/>' +
-        '<circle class="bulb-dynamic" cx="72" cy="98" r="4.6" fill="#d4243b"/>' +
+        // bombillas (cada una con clase bulb-dynamic)
+        '<circle class="bulb-dynamic" cx="72" cy="32"  r="4.6" fill="#d4243b"/>' +
+        '<circle class="bulb-dynamic" cx="56" cy="58"  r="4.6" fill="#f5c542"/>' +
+        '<circle class="bulb-dynamic" cx="88" cy="65"  r="4.6" fill="#38bdf8"/>' +
+        '<circle class="bulb-dynamic" cx="42" cy="92"  r="4.6" fill="#22c55e"/>' +
+        '<circle class="bulb-dynamic" cx="72" cy="98"  r="4.6" fill="#d4243b"/>' +
         '<circle class="bulb-dynamic" cx="100" cy="90" r="4.6" fill="#f5c542"/>' +
         '<circle class="bulb-dynamic" cx="32" cy="130" r="4.6" fill="#38bdf8"/>' +
         '<circle class="bulb-dynamic" cx="58" cy="138" r="4.6" fill="#22c55e"/>' +
         '<circle class="bulb-dynamic" cx="84" cy="132" r="4.6" fill="#d4243b"/>' +
-        '<circle class="bulb-dynamic" cx="110" cy="142" r="4.6" fill="#f5c542"/>' +
+        '<circle class="bulb-dynamic" cx="110" cy="142" r="4.6" fill="#ec4899"/>' +
         '</svg>';
 
       var modoActual = 1;
@@ -399,15 +400,11 @@ html.tema-navidad #loading-screen .w-10 {
       function actualizar() {
         var ahora = new Date();
         var anioActual = ahora.getFullYear();
-
         var navidad = new Date(anioActual, 11, 25, 0, 0, 0);
         if (ahora > navidad) navidad = new Date(anioActual + 1, 11, 25, 0, 0, 0);
-        var diffNavidad = navidad - ahora;
-
         var anoNuevo = new Date(anioActual + 1, 0, 1, 0, 0, 0);
-        var diffAnioNuevo = anoNuevo - ahora;
 
-        function formatearTiempo(ms) {
+        function formatear(ms) {
           if (ms <= 0) return "¡Llegó!";
           var d = Math.floor(ms / 86400000);
           var h = Math.floor((ms % 86400000) / 3600000);
@@ -416,64 +413,108 @@ html.tema-navidad #loading-screen .w-10 {
           return d + "d " + h + "h " + m + "m " + s + "s";
         }
 
-        var elXmas = document.getElementById("pp-timer-xmas");
-        var elNewYear = document.getElementById("pp-timer-newyear");
-        if (elXmas) elXmas.textContent = formatearTiempo(diffNavidad);
-        if (elNewYear) elNewYear.textContent = formatearTiempo(diffAnioNuevo);
+        var elX = document.getElementById("pp-timer-xmas");
+        var elN = document.getElementById("pp-timer-newyear");
+        if (elX) elX.textContent = formatear(navidad - ahora);
+        if (elN) elN.textContent = formatear(anoNuevo - ahora);
       }
-
       actualizar();
       if (window.__ppTimerInterval) clearInterval(window.__ppTimerInterval);
       window.__ppTimerInterval = setInterval(actualizar, 1000);
     }
 
-    function snow() {
-      if (MAX_SNOW === 0) return;
+    // ========== NIEVE CON CANVAS (un solo elemento) ==========
+    function initSnow() {
+      if (reducedMotion) return;
+      if (document.querySelector(".pp-snow-canvas")) return;
 
-      var layer = document.querySelector(".pp-fx-screen");
-      if (!layer) {
-        layer = document.createElement("div");
-        layer.className = "pp-fx-screen";
-        document.body.appendChild(layer);
+      var canvas = document.createElement("canvas");
+      canvas.className = "pp-snow-canvas";
+      document.body.appendChild(canvas);
+
+      var ctx = canvas.getContext("2d");
+      var flakes = [];
+      var W, H;
+      var running = true;
+      var lastTime = 0;
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      // Crear partículas (pool fijo)
+      var COUNT = Math.min(55, Math.floor(W / 25)); // se adapta a la pantalla
+      for (var i = 0; i < COUNT; i++) {
+        flakes.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 1.2 + Math.random() * 2.8,
+          d: Math.random() * COUNT,          // densidad / velocidad base
+          drift: Math.random() * 1.5 - 0.75,
+          opacity: 0.4 + Math.random() * 0.5
+        });
       }
 
-      function flake() {
-        if (document.hidden) return;
-        var current = layer.children.length;
-        if (current >= MAX_SNOW) return;
+      function draw(time) {
+        if (!running || document.hidden) {
+          requestAnimationFrame(draw);
+          return;
+        }
 
-        var p = document.createElement("span");
-        p.className = "pp-particle-nieve";
-        var size = 2 + Math.random() * 4.5;
-        p.style.left = Math.random() * 100 + "%";
-        p.style.width = size + "px";
-        p.style.height = size + "px";
-        p.style.setProperty("--drift", (Math.random() * 50 - 18) + "px");
-        p.style.animationDuration = (7 + Math.random() * 9) + "s";
-        layer.appendChild(p);
+        var delta = Math.min((time - lastTime) / 16.67, 3); // normalizado a ~60fps
+        lastTime = time;
 
-        // Limpieza más agresiva
-        setTimeout(function () {
-          if (p.parentNode) p.remove();
-        }, 16000);
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < flakes.length; i++) {
+          var f = flakes[i];
+          
+          // movimiento
+          f.y += (Math.cos(f.d) + 1 + f.r / 2) * 0.55 * delta;
+          f.x += Math.sin(f.d) * 0.6 * delta + f.drift * 0.3;
+
+          // reiniciar cuando sale de pantalla
+          if (f.y > H + 8) {
+            f.y = -8;
+            f.x = Math.random() * W;
+          }
+          if (f.x > W + 10) f.x = -10;
+          if (f.x < -10) f.x = W + 10;
+
+          // dibujar
+          ctx.beginPath();
+          ctx.globalAlpha = f.opacity;
+          ctx.fillStyle = "#ffffff";
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+
+        requestAnimationFrame(draw);
       }
 
-      // Arranque suave
-      for (var i = 0; i < 10; i++) setTimeout(flake, i * 80);
+      requestAnimationFrame(draw);
 
-      if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
-      window.__ppSnowTimer = setInterval(flake, SNOW_INTERVAL);
+      // Guardar para cleanup
+      window.__ppSnowCleanup = function () {
+        running = false;
+        canvas.remove();
+        window.removeEventListener("resize", resize);
+      };
     }
 
-    // Ejecución inicial
+    // Ejecución
     markLogos();
     putHats();
     placeLights();
     placeTopCounters();
     placeTree();
-    snow();
+    initSnow();
 
-    // Observer throttled (mucho más liviano)
+    // Observer throttled
     if (!window.__ppNavidadObserver) {
       var scheduled = false;
       window.__ppNavidadObserver = new MutationObserver(function () {
@@ -485,29 +526,23 @@ html.tema-navidad #loading-screen .w-10 {
           scheduled = false;
         });
       });
-      window.__ppNavidadObserver.observe(document.body, {
-        childList: true,
-        subtree: true
-      });
+      window.__ppNavidadObserver.observe(document.body, { childList: true, subtree: true });
     }
   }
 
-  // Solo dos ejecuciones (suficiente)
   runNavidadTheme();
-  setTimeout(runNavidadTheme, 600);
+  setTimeout(runNavidadTheme, 500);
 
   // Cleanup
   window.__ppTemaCleanup = window.__ppTemaCleanup || {};
   window.__ppTemaCleanup[ID] = function () {
-    if (window.__ppSnowTimer) clearInterval(window.__ppSnowTimer);
     if (window.__ppTimerInterval) clearInterval(window.__ppTimerInterval);
+    if (window.__ppSnowCleanup) window.__ppSnowCleanup();
     if (window.__ppNavidadObserver) {
-      try { window.__ppNavidadObserver.disconnect(); } catch (e) {}
+      try { window.__ppNavidadObserver.disconnect(); } catch(e){}
       window.__ppNavidadObserver = null;
     }
-    document.querySelectorAll(".pp-seasonal-hat, .pp-fx-screen, .pp-lights-overlay, .pp-xmas-tree, .pp-top-counters-bar").forEach(function (e) {
-      e.remove();
-    });
+    document.querySelectorAll(".pp-seasonal-hat, .pp-lights-overlay, .pp-xmas-tree, .pp-top-counters-bar, .pp-snow-canvas").forEach(function(e){ e.remove(); });
   };
 })();
 </script>
